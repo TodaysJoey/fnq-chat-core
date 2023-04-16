@@ -3,6 +3,9 @@
 
 const { Builder, By, Key, until } = require("selenium-webdriver");
 const chrome = require("selenium-webdriver/chrome");
+const fs = require("fs");
+const reulstFileName = "result.txt";
+
 const sleep = (ms) => {
   return new Promise((resolve) => {
     setTimeout(resolve, ms);
@@ -14,6 +17,19 @@ let contents = new Map();
 // app.listen(300, '0.0.0.0', ()=>{
 //     console.log('Server is running : port 3000');
 // });
+
+// map to stirng
+const replacer = function (key, value) {
+  if (value instanceof Map) {
+    //형식 확인
+    return {
+      dataType: "Map", //정의
+      value: Array.from(value.entries()), //entries 함수를 통해 배열로 변경(이중)
+    };
+  } else {
+    return value;
+  }
+};
 
 const run = async () => {
   // headless로 크롬 드라이버 실행
@@ -89,7 +105,6 @@ const run = async () => {
         for (var j = 0; j < activeTabContainer.length; j++) {
           temp += await activeTabContainer[j].getText();
         }
-
         contents.set(title, temp);
       } catch {
         console.log(title + "은 클릭 상호작용할 수 없는 요소입니다.");
@@ -97,10 +112,15 @@ const run = async () => {
     }
 
     console.log(contents);
+    let resultStr = JSON.stringify(contents, replacer);
+    fs.writeFileSync(reulstFileName, resultStr, (err) => {
+      if (err) throw err;
+    });
   } catch (e) {
     console.log(e);
   } finally {
     driver.quit();
   }
 };
+
 run();
