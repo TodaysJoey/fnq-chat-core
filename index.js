@@ -20,6 +20,8 @@ app.get("/", (req, res) => {
 
 app.listen(3000, "0.0.0.0", async () => {
   console.log("Server is running : port 3000");
+
+  // TODO 파일이 없거나, 존재하지만 아무것도 없는 빈 파일일 경우에 대한 예외처리 필요
   let tempContents = fs.readFileSync(reulstFileName);
   resultContents = JSON.parse(tempContents.toString());
   let tempResKeyArr = Object.keys(resultContents);
@@ -38,16 +40,18 @@ app.listen(3000, "0.0.0.0", async () => {
   let dfd = dfCreator.getDataFrame(resultContents); // 여기에 크롤링 결과인 json 데이터를 전달
 
   let tokenCreator = new Tokenizer();
-  await tokenCreator.setDataForTokenizer(dfd);
+  await tokenCreator.setDataForTokenizer(resultContents);
   let tokenedData = await tokenCreator.getTokenData(4000);
+
   console.log("tokenedData------------------------------");
-  console.log(tokenedData);
+  //console.log(tokenedData);
 
   dfd = dfCreator.getDataFrame(tokenedData); // 토크나이저 처리 된 데이터를 임베딩하기 전 dataframe화 시킨다
   let embedder = new Embedding();
   let embedRes = await embedder.runEmbedding(tokenedData);
+  console.log(embedRes.data.data);
 
-  dfd.addColumn("embeddings", embedRes["data"][0]["embedding"], {
+  dfd.addColumn("embeddings", embedRes["data"]["data"][0]["embedding"], {
     inplace: true,
   });
   dfCreator.makeToCSV(dfd, true, "processed/embeddings.csv");

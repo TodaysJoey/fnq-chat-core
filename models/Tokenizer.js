@@ -4,6 +4,8 @@
 // const maxToken = 4000;
 const assert = require("node:assert");
 const { get_encoding, encoding_for_model } = require("@dqbd/tiktoken");
+const dfd = require("danfojs-node");
+
 // const encoder = encodingForModel("gpt-3.5-turbo");
 
 class Tokenizer {
@@ -13,7 +15,20 @@ class Tokenizer {
   }
 
   async setDataForTokenizer(data) {
-    this.df = pd.DataFrame(data, (columns = ["fname", "text"]));
+    this.df = new dfd.DataFrame(data, { columns: ["fname", "text"] });
+    //this.tokenizer.encode()
+    let n_tokens = [];
+
+    for (let i = 0; i < this.df.shape[0]; i++) {
+      // if (!this.df.iloc({ rows: [i] })["text"].values[0]) n_tokens.push(0)
+      n_tokens.push(
+        this.tokenizer.encode(this.df.iloc({ rows: [i] })["text"].values[0])
+          .length
+      );
+    }
+    this.df.addColumn("n_tokens", n_tokens, {
+      inplace: true,
+    });
   }
 
   getDataForTokenizer() {
@@ -27,13 +42,13 @@ class Tokenizer {
     let token_so_far = 0;
     let chunk = [];
 
-    for (sentence in sentences) {
+    for (let sentence in sentences) {
       nTokens.push(this.tokenizer.encode(" " + sentence).length);
     }
 
     for (let i = 0; i < nTokens.length; i++) {
       if (token_so_far + nTokens[i] > max_token) {
-        chunks.push("" + chunk);
+        chunks.push(". " + chunk + ".");
         chunk = [];
         token_so_far = 0;
       }
@@ -41,11 +56,11 @@ class Tokenizer {
         continue;
       }
 
-      chunk.push(sentence[i]);
+      chunk.push(sentences[i]);
       token_so_far += nTokens[i] + 1;
     }
 
-    chunks.push("" + chunk);
+    chunks.push(". " + chunk + ".");
     return chunks;
   }
 
@@ -59,13 +74,17 @@ class Tokenizer {
       // person.email = df.iloc({rows: [i]})["Email"].values[0];
       // person.phone = df.iloc({rows: [i]})["Telefone"].values[0];
       // person.created_at = df.iloc({rows: [i]})["Data"].values[0];
-      if (!df.iloc({ rows: [i] })["text"].values[0]) continue;
+      if (!this.df.iloc({ rows: [i] })["text"].values[0]) continue;
 
-      if (df.iloc({ rows: [i] })["n_tokens"].values[0] > max_tokens)
-        shortened.push(
-          ...this._splitStrIntoMany(df.iloc({ rows: [i] })["text"].values[0])
+      if (this.df.iloc({ rows: [i] })["n_tokens"].values[0] > max_tokens) {
+        let temp = await this._splitStrIntoMany(
+          this.df.iloc({ rows: [i] })["text"].values[0]
         );
-      else shortened.push(df.iloc({ rows: [i] })["text"].values[0]);
+
+        shortened.push(...temp);
+      } else {
+        shortened.push(this.df.iloc({ rows: [i] })["text"].values[0]);
+      }
     }
 
     return shortened;

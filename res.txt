@@ -1,0 +1,246 @@
+/usr/local/bin/node ./index.js
+Server is running : port 3000
+tokenedData------------------------------
+RUN EMBEDDING
+response
+{status: 200, statusText: 'OK', headers: {…}, config: {…}, request: ClientRequest, …}
+config: {transitional: {…}, adapter: ƒ, transformRequest: Array(1), transformResponse: Array(1), timeout: 0, …}
+data: {object: 'list', data: Array(193), model: 'text-embedding-ada-002-v2', usage: {…}}
+data: (193) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, …]
+length: 193
+[[Prototype]]: Array(0)
+[0..99]:
+0: {object: 'embedding', index: 0, embedding: Array(1536)}
+embedding: (1536) [-0.003992162, -0.0023889712, 0.019058496, -0.028208172, -0.020057369, 0.009136357, -0.018951949, -0.000047576526, -0.0006921357, 0.007837823, 0.005880032, -0.0023123908, 0.019058496, 0.016408153, 0.011387152, 0.033615403, 0.014636818, 0.018299352, -0.006885564, -0.013584672, 0.0042651873, 0.021082878, 0.0137045365, -0.0074382736, -0.038409993, 0.009662431, 0.009755659, -0.02507837, -0.002051019, -0.0008103357, 0.01933818, 0.019524636, -0.014583545, 0.0014558573, 0.00064177584, -0.011879928, 0.019751048, -0.012838847, 0.004927773, -0.006885564, 0.0081974175, -0.0015624037, -0.0025920754, 0.0137045365, 0.006878905, 0.018286034, 0.013158486, -0.018592356, 0.0040754015, 0.020430282, -0.0049810465, 0.051382024, -0.0193515, -0.015342688, -0.0019128417, 0.021655565, 0.021588974, 0.02618379, 0.010781169, -0.034467775, 0.008763446, 0.004464962, -0.03875627, -0.007977665, -0.009755659, 0.0025954049, -0.00089898566, 0.0071119755, -0.007398319, 0.0044383253, 0.019937504, 0.051781572, …]
+length: 1536
+[[Prototype]]: Array(0)
+[0..99]:
+0: -0.003992162
+1: -0.0023889712
+2: 0.019058496
+3: -0.028208172
+4: -0.020057369
+5: 0.009136357
+6: -0.018951949
+7: -0.000047576526
+8: -0.0006921357
+9: 0.007837823
+10: 0.005880032
+11: -0.0023123908
+12: 0.019058496
+13: 0.016408153
+14: 0.011387152
+15: 0.033615403
+16: 0.014636818
+17: 0.018299352
+18: -0.006885564
+19: -0.013584672
+20: 0.0042651873
+21: 0.021082878
+22: 0.0137045365
+23: -0.0074382736
+24: -0.038409993
+25: 0.009662431
+26: 0.009755659
+27: -0.02507837
+28: -0.002051019
+29: -0.0008103357
+30: 0.01933818
+31: 0.019524636
+32: -0.014583545
+33: 0.0014558573
+34: 0.00064177584
+35: -0.011879928
+36: 0.019751048
+37: -0.012838847
+38: 0.004927773
+39: -0.006885564
+40: 0.0081974175
+41: -0.0015624037
+42: -0.0025920754
+43: 0.0137045365
+44: 0.006878905
+45: 0.018286034
+46: 0.013158486
+47: -0.018592356
+48: 0.0040754015
+49: 0.020430282
+50: -0.0049810465
+51: 0.051382024
+52: -0.0193515
+53: -0.015342688
+54: -0.0019128417
+55: 0.021655565
+56: 0.021588974
+57: 0.02618379
+58: 0.010781169
+59: -0.034467775
+60: 0.008763446
+61: 0.004464962
+62: -0.03875627
+63: -0.007977665
+64: -0.009755659
+65: 0.0025954049
+66: -0.00089898566
+67: 0.0071119755
+68: -0.007398319
+69: 0.0044383253
+70: 0.019937504
+71: 0.051781572
+72: -0.0009880518
+73: 0.014250588
+74: 0.06094457
+75: 0.011233991
+76: -0.013944266
+77: -0.0031248075
+78: 0.02507837
+79: -0.003206382
+80: 0.011833315
+81: 0.002051019
+82: -0.022108387
+83: 0.028527811
+84: -0.0015257784
+85: 0.02618379
+86: 0.035186965
+87: 0.024199361
+88: -0.010541439
+89: -0.035000507
+90: 0.02035037
+91: -0.0050809337
+92: -0.011393811
+93: 0.03915582
+94: 0.011780041
+95: -0.0028983962
+96: -0.021469109
+97: -0.0014167348
+98: -0.011047535
+99: -0.006359491
+[[Prototype]]: Object
+[100..199]:
+[200..299]:
+[300..399]:
+[400..499]:
+[500..599]:
+[600..699]:
+[700..799]:
+[800..899]:
+[900..999]:
+[1000..1099]:
+[1100..1199]:
+[1200..1299]:
+[1300..1399]:
+[1400..1499]:
+[1500..1535]:
+index: 0
+object: 'embedding'
+[[Prototype]]: Object
+1: {object: 'embedding', index: 1, embedding: Array(1536)}
+2: {object: 'embedding', index: 2, embedding: Array(1536)}
+3: {object: 'embedding', index: 3, embedding: Array(1536)}
+4: {object: 'embedding', index: 4, embedding: Array(1536)}
+5: {object: 'embedding', index: 5, embedding: Array(1536)}
+6: {object: 'embedding', index: 6, embedding: Array(1536)}
+7: {object: 'embedding', index: 7, embedding: Array(1536)}
+8: {object: 'embedding', index: 8, embedding: Array(1536)}
+9: {object: 'embedding', index: 9, embedding: Array(1536)}
+10: {object: 'embedding', index: 10, embedding: Array(1536)}
+11: {object: 'embedding', index: 11, embedding: Array(1536)}
+12: {object: 'embedding', index: 12, embedding: Array(1536)}
+13: {object: 'embedding', index: 13, embedding: Array(1536)}
+14: {object: 'embedding', index: 14, embedding: Array(1536)}
+15: {object: 'embedding', index: 15, embedding: Array(1536)}
+16: {object: 'embedding', index: 16, embedding: Array(1536)}
+17: {object: 'embedding', index: 17, embedding: Array(1536)}
+18: {object: 'embedding', index: 18, embedding: Array(1536)}
+19: {object: 'embedding', index: 19, embedding: Array(1536)}
+20: {object: 'embedding', index: 20, embedding: Array(1536)}
+21: {object: 'embedding', index: 21, embedding: Array(1536)}
+22: {object: 'embedding', index: 22, embedding: Array(1536)}
+23: {object: 'embedding', index: 23, embedding: Array(1536)}
+24: {object: 'embedding', index: 24, embedding: Array(1536)}
+25: {object: 'embedding', index: 25, embedding: Array(1536)}
+26: {object: 'embedding', index: 26, embedding: Array(1536)}
+27: {object: 'embedding', index: 27, embedding: Array(1536)}
+28: {object: 'embedding', index: 28, embedding: Array(1536)}
+29: {object: 'embedding', index: 29, embedding: Array(1536)}
+30: {object: 'embedding', index: 30, embedding: Array(1536)}
+31: {object: 'embedding', index: 31, embedding: Array(1536)}
+32: {object: 'embedding', index: 32, embedding: Array(1536)}
+33: {object: 'embedding', index: 33, embedding: Array(1536)}
+34: {object: 'embedding', index: 34, embedding: Array(1536)}
+35: {object: 'embedding', index: 35, embedding: Array(1536)}
+36: {object: 'embedding', index: 36, embedding: Array(1536)}
+37: {object: 'embedding', index: 37, embedding: Array(1536)}
+38: {object: 'embedding', index: 38, embedding: Array(1536)}
+39: {object: 'embedding', index: 39, embedding: Array(1536)}
+40: {object: 'embedding', index: 40, embedding: Array(1536)}
+41: {object: 'embedding', index: 41, embedding: Array(1536)}
+42: {object: 'embedding', index: 42, embedding: Array(1536)}
+43: {object: 'embedding', index: 43, embedding: Array(1536)}
+44: {object: 'embedding', index: 44, embedding: Array(1536)}
+45: {object: 'embedding', index: 45, embedding: Array(1536)}
+46: {object: 'embedding', index: 46, embedding: Array(1536)}
+47: {object: 'embedding', index: 47, embedding: Array(1536)}
+48: {object: 'embedding', index: 48, embedding: Array(1536)}
+49: {object: 'embedding', index: 49, embedding: Array(1536)}
+50: {object: 'embedding', index: 50, embedding: Array(1536)}
+51: {object: 'embedding', index: 51, embedding: Array(1536)}
+52: {object: 'embedding', index: 52, embedding: Array(1536)}
+53: {object: 'embedding', index: 53, embedding: Array(1536)}
+54: {object: 'embedding', index: 54, embedding: Array(1536)}
+55: {object: 'embedding', index: 55, embedding: Array(1536)}
+56: {object: 'embedding', index: 56, embedding: Array(1536)}
+57: {object: 'embedding', index: 57, embedding: Array(1536)}
+58: {object: 'embedding', index: 58, embedding: Array(1536)}
+59: {object: 'embedding', index: 59, embedding: Array(1536)}
+60: {object: 'embedding', index: 60, embedding: Array(1536)}
+61: {object: 'embedding', index: 61, embedding: Array(1536)}
+62: {object: 'embedding', index: 62, embedding: Array(1536)}
+63: {object: 'embedding', index: 63, embedding: Array(1536)}
+64: {object: 'embedding', index: 64, embedding: Array(1536)}
+65: {object: 'embedding', index: 65, embedding: Array(1536)}
+66: {object: 'embedding', index: 66, embedding: Array(1536)}
+67: {object: 'embedding', index: 67, embedding: Array(1536)}
+68: {object: 'embedding', index: 68, embedding: Array(1536)}
+69: {object: 'embedding', index: 69, embedding: Array(1536)}
+70: {object: 'embedding', index: 70, embedding: Array(1536)}
+71: {object: 'embedding', index: 71, embedding: Array(1536)}
+72: {object: 'embedding', index: 72, embedding: Array(1536)}
+73: {object: 'embedding', index: 73, embedding: Array(1536)}
+74: {object: 'embedding', index: 74, embedding: Array(1536)}
+75: {object: 'embedding', index: 75, embedding: Array(1536)}
+76: {object: 'embedding', index: 76, embedding: Array(1536)}
+77: {object: 'embedding', index: 77, embedding: Array(1536)}
+78: {object: 'embedding', index: 78, embedding: Array(1536)}
+79: {object: 'embedding', index: 79, embedding: Array(1536)}
+80: {object: 'embedding', index: 80, embedding: Array(1536)}
+81: {object: 'embedding', index: 81, embedding: Array(1536)}
+82: {object: 'embedding', index: 82, embedding: Array(1536)}
+83: {object: 'embedding', index: 83, embedding: Array(1536)}
+84: {object: 'embedding', index: 84, embedding: Array(1536)}
+85: {object: 'embedding', index: 85, embedding: Array(1536)}
+86: {object: 'embedding', index: 86, embedding: Array(1536)}
+87: {object: 'embedding', index: 87, embedding: Array(1536)}
+88: {object: 'embedding', index: 88, embedding: Array(1536)}
+89: {object: 'embedding', index: 89, embedding: Array(1536)}
+90: {object: 'embedding', index: 90, embedding: Array(1536)}
+91: {object: 'embedding', index: 91, embedding: Array(1536)}
+92: {object: 'embedding', index: 92, embedding: Array(1536)}
+93: {object: 'embedding', index: 93, embedding: Array(1536)}
+94: {object: 'embedding', index: 94, embedding: Array(1536)}
+95: {object: 'embedding', index: 95, embedding: Array(1536)}
+96: {object: 'embedding', index: 96, embedding: Array(1536)}
+97: {object: 'embedding', index: 97, embedding: Array(1536)}
+98: {object: 'embedding', index: 98, embedding: Array(1536)}
+99: {object: 'embedding', index: 99, embedding: Array(1536)}
+[[Prototype]]: Object
+[100..192]:
+model: 'text-embedding-ada-002-v2'
+object: 'list'
+usage: {prompt_tokens: 140807, total_tokens: 140807}
+[[Prototype]]: Object
+headers: {date: 'Wed, 26 Apr 2023 18:27:47 GMT', content-type: 'application/json', content-length: '6429403', connection: 'close', access-control-allow-origin: '*', …}
+request: ClientRequest {_events: {…}, _eventsCount: 7, _maxListeners: undefined, outputData: Array(0), outputSize: 0, …}
+status: 200
+statusText: 'OK'
+[[Prototype]]: Object

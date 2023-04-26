@@ -1,14 +1,14 @@
 "use strict";
 
 const df = require("danfojs-node");
-const tf = require("@tensorflow/tfjs-node");
+// const tf = require("@tensorflow/tfjs-node");
 
 class DataFrameModel {
   constructor() {}
 
   getDataFrame(rawData) {
-    console.log(rawData);
-    return df.DataFrame(rawData, { columns: ["fname", "text"] });
+    // return df.DataFrame(rawData, { columns: ["fname", "text"] });
+    return new df.DataFrame(rawData);
   }
 
   makeToCSV(dataFrameObj, isFileDown, filePath) {

@@ -104,13 +104,12 @@ class Crawler {
 
       // TODO 저장 실패에 따른 로직 필요?
       let resultStr = JSON.stringify(this.contents);
-      console.log(resultStr);
       fs.writeFileSync(this.saveFileName, resultStr, (err) => {
         if (err) return false;
         else return true;
       });
 
-      // return this.contents;
+      return this.contents;
     } catch (e) {
       console.log(e);
     } finally {

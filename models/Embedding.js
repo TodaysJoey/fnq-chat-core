@@ -5,8 +5,7 @@ const dfd = require("danfojs-node");
 const tf = require("@tensorflow/tfjs-node");
 
 const configuration = new Configuration({
-  // apiKey: process.env.OPENAI_API_KEY,
-  apiKey: "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",
+  apiKey: process.env.OPENAI_API_KEY,
 });
 const openai = new OpenAIApi(configuration);
 
@@ -21,12 +20,13 @@ class Embedding {
   // console.log(completion.data.choices[0].text);
 
   async runEmbedding(shortenedData) {
+    console.log("RUN EMBEDDING");
     let response = await openai.createEmbedding({
       model: "text-embedding-ada-002",
       input: shortenedData,
     });
 
-    console.log(response);
+    console.log(response.data);
     return response;
     // response format
     //   {

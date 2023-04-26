@@ -1,0 +1,942 @@
+    '예제와 가이드 함께 보기\n' +
+    '원하는 시점에 GridView 셀의 inputType을 변경하는 예제입니다.\n' +
+    '컬럼 [동적 inputType]의 inputType 변경하기\n' +
+    '유형 동적 inputType\n' +
+    '1 checkbox Y\n' +
+    '2 select 02\n' +
+    '3 calendar 20020415\n' +
+    '4 input 공정하다는 착각\n' +
+    '예제 소스\n' +
+    'Script\n' +
+    'Body\n' +
+    'DataCollection\n' +
+    'CSS\n' +
+    'Original Source\n' +
+    'History\n' +
+    'Script\n' +
+    'scwin.onpageload = function () {\n' +
+    '\n' +
+    '};\n' +
+    '\n' +
+    '/**\n' +
+    ' * 버튼 [1번째 행의 inputType을 "checkbox"로 변경하기] 클릭 시\n' +
+    ' */\n' +
+    'scwin.btn_ex1_onclick = function (e) {\n' +
+    ' var jsnCellInfo;\n' +
+    ' var numRowIndex;\n' +
+    ' var strColID;\n' +
+    '\n' +
+    ' strRowIndex = 0; //변경할 행의 index \n' +
+    ' strColID = "type_value" //변경할 열의 ID\n' +
+    '\n' +
+    ' strID = "dynamic_select_" + strRowIndex + "_" + strColID; //중복되지 않는 GridVIew의 셀 ID 생성\n' +
+    '\n' +
+    ' //inputType 정보\n' +
+    ' jsnCellInfo = {\n' +
+    ' id: strID,\n' +
+    ' inputType: "checkbox",\n' +
+    ' options: { valueType: "other", trueValue: "Y", falseValue: "N", checkboxLabel: "선택" }\n' +
+    ' };\n' +
+    '\n' +
+    ' //GridView "grd_exam1"의 셀 inputType을 변경합니다.\n' +
+    ' grd_exam1.setCellInputType(strRowIndex, strColID, jsnCellInfo);\n' +
+    '};\n' +
+    '\n' +
+    '/**\n' +
+    ' * 버튼 [2번째 행의 inputType을 "select"로 변경하기] 클릭 시\n' +
+    ' */\n' +
+    'scwin.btn_ex2_onclick = function (e) {\n' +
+    ' var jsnCellInfo;\n' +
+    ' var numRowIndex;\n' +
+    ' var strColID;\n' +
+    '\n' +
+    ' strRowIndex = 1; //변경할 행의 index\n' +
+    ' strColID = "type_value" //변경할 열의 ID\n' +
+    '\n' +
+    ' strID = "dynamic_select_" + strRowIndex + "_" + strColID; //중복되지 않는 GridVIew의 셀 ID 생성\n' +
+    '\n' +
+    ' //inputType 정보\n' +
+    ' jsnCellInfo = {\n' +
+    ' id: strID,\n' +
+    ' inputType: "select",\n' +
+    ' options: { viewType: "icon" },\n' +
+    ' itemSet: {\n' +
+    ' nodeset: "data:dlt_code",\n' +
+    ' label: "label",\n' +
+    ' value: "code"\n' +
+    ' }\n' +
+    ' };\n' +
+    '\n' +
+    ' //GridView "grd_exam1"의 셀 inputType을 변경합니다.\n' +
+    ' grd_exam1.setCellInputType(strRowIndex, strColID, jsnCellInfo);\n' +
+    '};\n' +
+    '\n' +
+    '/**\n' +
+    ' * 버튼 [3번째 행의 inputType을 "calenar"로 변경하기] 클릭 시\n' +
+    ' */\n' +
+    'scwin.btn_ex3_onclick = function (e) {\n' +
+    ' var jsnCellInfo;\n' +
+    ' var numRowIndex;\n' +
+    ' var strColID;\n' +
+    '\n' +
+    ' strRowIndex = 2; //변경할 행의 index\n' +
+    ' strColID = "type_value" //변경할 열의 ID\n' +
+    '\n' +
+    ' strID = "dynamic_select_" + strRowIndex + "_" + strColID; //중복되지 않는 GridVIew의 셀 ID 생성\n' +
+    '\n' +
+    ' //inputType 정보\n' +
+    ' jsnCellInfo = {\n' +
+    ' id: strID,\n' +
+    ' inputType: "calendar",\n' +
+    ' options: { viewType: "icon", dataType: "date", displayFormat: "yyyy-MM-dd" }\n' +
+    ' };\n' +
+    '\n' +
+    ' //GridView "grd_exam1"의 셀 inputType을 변경합니다.\n' +
+    ' grd_exam1.setCellInputType(strRowIndex, strColID, jsnCellInfo);\n' +
+    '};',
+  'GridView\n' +
+    '[GridView] 셀의 글자색 지정하기\n' +
+    '〈\n' +
+    '/page/P00187.xmlgridgridViewsetCellColor그리드뷰\n' +
+    '〉\n' +
+    '예제와 가이드 함께 보기\n' +
+    'GridView의 특정 셀의 글자색을 지정하는 예제입니다.\n' +
+    '이 기능은 함수 setCellColor를 호출하여 사용할 수 있습니다.\n' +
+    'GridView 셀의 글자색 지정하기\n' +
+    '아래의 버튼을 클릭하고 GridView 셀의 글자색을 확인합니다.\n' +
+    '도서명 정가 출간일\n' +
+    '1 사람일까 상황일까 28,000 2019-08-26\n' +
+    '2 내가 틀릴 수도 있습니다 16,000 2022-04-18\n' +
+    '3 공정하다는 착각 18,000 2020-12-01\n' +
+    '4 정글만리 16,500 2013-07-01\n' +
+    'See Also\n' +
+    '[GridView] 셀에 class 적용하기\n' +
+    '예제 소스\n' +
+    'Script\n' +
+    'Body\n' +
+    'DataCollection\n' +
+    'CSS\n' +
+    'Original Source\n' +
+    'History\n' +
+    'Script\n' +
+    'scwin.onpageload = function () {\n' +
+    '\n' +
+    '};\n' +
+    '\n' +
+    '/**\n' +
+    " * 버튼 [컬럼 '출간일'의 2번째 행에 글자색을 'tomato'로 지정하기] 클릭 시\n" +
+    ' */\n' +
+    'scwin.btn_ex1_onclick = function (e) {\n' +
+    " //GridView 'grd_exam1'의 컬럼 '출간일'의 2번째 행의 글자색을 'tomato'로 지정하기\n" +
+    ' grd_exam1.setCellColor(1, "published_date", "tomato");\n' +
+    '};\n' +
+    '\n' +
+    '/**\n' +
+    " * 버튼 [컬럼 '도서명'의 3번째 행에 글자색을 '#DAA520'로 지정하기] 클릭 시\n" +
+    ' */\n' +
+    'scwin.btn_ex2_onclick = function (e) {\n' +
+    " //GridView 'grd_exam1'의 컬럼 '도서명'의 3번째 행의 글자색을 '#DAA520'로 지정하기\n" +
+    ' grd_exam1.setCellColor(2, "book_name", "#DAA520");\n' +
+    '};',
+  'GridView\n' +
+    '[GridView] 셀의 배경색 지정하기\n' +
+    '〈\n' +
+    '/page/P00185.xmlgridgridViewsetCellBackgroundColor그리드뷰\n' +
+    '〉\n' +
+    '예제와 가이드 함께 보기\n' +
+    'GridView의 특정 셀의 배경색을 지정하는 예제입니다.\n' +
+    '이 기능은 함수 setCellBackgroundColor를 호출하여 사용할 수 있습니다.\n' +
+    'GridView 셀의 배경색 지정하기\n' +
+    '아래의 버튼을 클릭하고 GridView 셀의 배경색을 확인합니다.\n' +
+    '도서명 정가 출간일\n' +
+    '1 사람일까 상황일까 28,000 2019-08-26\n' +
+    '2 내가 틀릴 수도 있습니다 16,000 2022-04-18\n' +
+    '3 공정하다는 착각 18,000 2020-12-01\n' +
+    '4 정글만리 16,500 2013-07-01\n' +
+    'See Also\n' +
+    '[GridView] 셀에 class 적용하기\n' +
+    '예제 소스\n' +
+    'Script\n' +
+    'Body\n' +
+    'DataCollection\n' +
+    'CSS\n' +
+    'Original Source\n' +
+    'History\n' +
+    'Script\n' +
+    'scwin.onpageload = function () {\n' +
+    '\n' +
+    '};\n' +
+    '\n' +
+    '/**\n' +
+    " * 버튼 [컬럼 '정가'의 2번째 행에 배경색을 'peru'로 지정하기] 클릭 시\n" +
+    ' */\n' +
+    'scwin.btn_ex1_onclick = function (e) {\n' +
+    " //GridView 'grd_exam1'의 컬럼 '정가'의 2번째 행의 배경색을 'peru'로 지정하기\n" +
+    ' grd_exam1.setCellBackgroundColor(1, "price", "peru");\n' +
+    '};\n' +
+    '\n' +
+    '/**\n' +
+    " * 버튼 [컬럼 '도서명'의 1번째 행에 배경색을 '#9ACD32'로 지정하기] 클릭 시\n" +
+    ' */\n' +
+    'scwin.btn_ex2_onclick = function (e) {\n' +
+    " //GridView 'grd_exam1'의 컬럼 '도서명'의 1번째 행의 배경색을 '#9ACD32'로 지정하기\n" +
+    ' grd_exam1.setCellBackgroundColor(0, "book_name", "#9ACD32");\n' +
+    '};',
+  'GridView\n' +
+    '[GridView] 셀의 범위(range) 선택하기\n' +
+    '〈\n' +
+    '/page/P00097.xmlgridgridViewsetFocusedMultiCell그리드뷰\n' +
+    '〉\n' +
+    '예제와 가이드 함께 보기\n' +
+    'GridView의 범위 선택을 스크립트로 지정하는 예제입니다.\n' +
+    '각 버튼을 클릭하여 각 그리드의 범위 선택을 비교합니다.\n' +
+    '범위 선택 실행\n' +
+    '결과 확인용 GridView - [기본설정] focusMode : cell\n' +
+    '셀 선택 시 포커스(선택) 범위가 셀(Cell) 단위입니다.\n' +
+    '도서명 정가 출간일\n' +
+    '1 사람일까 상황일까 28,000 2019-08-26\n' +
+    '2 내가 틀릴 수도 있습니다 16,000 2022-04-18\n' +
+    '3 공정하다는 착각 18,000 2020-12-01\n' +
+    '4 정글만리 16,500 2013-07-01\n' +
+    '결과 확인용 GridView - focusMode : row\n' +
+    '셀 선택 시 포커스(선택) 범위가 행(Row) 단위입니다.\n' +
+    '도서명 정가 출간일\n' +
+    '1 사람일까 상황일까 28,000 2019-08-26\n' +
+    '2 내가 틀릴 수도 있습니다 16,000 2022-04-18\n' +
+    '3 공정하다는 착각 18,000 2020-12-01\n' +
+    '4 정글만리 16,500 2013-07-01\n' +
+    '결과 확인용 GridView - focusMode : both\n' +
+    '셀 선택 시 포커스(선택) 범위가 셀(Cell)+행(Row) 단위입니다.\n' +
+    '도서명 정가 출간일\n' +
+    '1 사람일까 상황일까 28,000 2019-08-26\n' +
+    '2 내가 틀릴 수도 있습니다 16,000 2022-04-18\n' +
+    '3 공정하다는 착각 18,000 2020-12-01\n' +
+    '4 정글만리 16,500 2013-07-01\n' +
+    '결과 확인용 GridView - focusMode : none\n' +
+    '셀 선택 시 포커스(선택)가 되지 않습니다.\n' +
+    '도서명 정가 출간일\n' +
+    '1 사람일까 상황일까 28,000 2019-08-26\n' +
+    '2 내가 틀릴 수도 있습니다 16,000 2022-04-18\n' +
+    '3 공정하다는 착각 18,000 2020-12-01\n' +
+    '4 정글만리 16,500 2013-07-01\n' +
+    '예제 소스\n' +
+    'Script\n' +
+    'Body\n' +
+    'DataCollection\n' +
+    'CSS\n' +
+    'Original Source\n' +
+    'History\n' +
+    'Script\n' +
+    'scwin.onpageload = function () {\n' +
+    '\n' +
+    '};\n' +
+    '\n' +
+    '/**\n' +
+    ' * 버튼 [1번째 행 1번째 컬럼 ~ 2번째 행 2번째 컬럼] 클릭시\n' +
+    ' */\n' +
+    'scwin.btn_ex1_onclick = function (e) {\n' +
+    ' //1번째 행 1번째 컬럼 ~ 2번째 행 2번째 컬럼 선택하기\n' +
+    ' grd_exam1.setFocusedMultiCell(0, 0, 1, 1);\n' +
+    ' grd_exam2.setFocusedMultiCell(0, 0, 1, 1);\n' +
+    ' grd_exam3.setFocusedMultiCell(0, 0, 1, 1);\n' +
+    ' grd_exam4.setFocusedMultiCell(0, 0, 1, 1);\n' +
+    '\n' +
+    ' //포커스 버튼으로 이동.\n' +
+    ' btn_ex1.focus();\n' +
+    '};\n' +
+    '\n' +
+    '/**\n' +
+    ' * 버튼 [행:1, 열:1 ~ 행:2, 열:2 + ignoreFocusMode 적용] 클릭시\n' +
+    ' */\n' +
+    'scwin.btn_ex3_onclick = function (e) {\n' +
+    ' //1번째 행 1번째 컬럼 ~ 2번째 행 2번째 컬럼 선택하기 - 설정된 FocusMode 무시\n' +
+    ' grd_exam1.setFocusedMultiCell(0, 0, 1, 1, { ignoreFocusMode: true });\n' +
+    ' grd_exam2.setFocusedMultiCell(0, 0, 1, 1, { ignoreFocusMode: true });\n' +
+    ' grd_exam3.setFocusedMultiCell(0, 0, 1, 1, { ignoreFocusMode: true });\n' +
+    ' grd_exam4.setFocusedMultiCell(0, 0, 1, 1, { ignoreFocusMode: true });\n' +
+    '\n' +
+    ' //포커스 버튼으로 이동.\n' +
+    ' btn_ex3.focus();\n' +
+    '};\n' +
+    '\n' +
+    '/**\n' +
+    ' * 버튼 [2번째 행 2번째 컬럼 ~ 4번째 행 3번째 컬럼] 클릭시\n' +
+    ' */\n' +
+    'scwin.btn_ex2_onclick = function (e) {\n' +
+    ' //2번째 행 2번째 컬럼 ~ 4번째 행 3번째 컬럼\n' +
+    ' grd_exam1.setFocusedMultiCell(1, 1, 3, 2);\n' +
+    ' grd_exam2.setFocusedMultiCell(1, 1, 3, 2);\n' +
+    ' grd_exam3.setFocusedMultiCell(1, 1, 3, 2);\n' +
+    ' grd_exam4.setFocusedMultiCell(1, 1, 3, 2);\n' +
+    '\n' +
+    ' //포커스 버튼으로 이동.\n' +
+    ' btn_ex2.focus();\n' +
+    '};\n' +
+    '\n' +
+    '/**\n' +
+    ' * 버튼 [행:2, 열:2 ~ 행:4, 열:3 + ignoreFocusMode 적용] 클릭시\n' +
+    ' */\n' +
+    'scwin.btn_ex4_onclick = function (e) {\n' +
+    ' //2번째 행 2번째 컬럼 ~ 4번째 행 3번째 컬럼 - 설정된 FocusMode 무시\n' +
+    ' grd_exam1.setFocusedMultiCell(1, 1, 3, 2, { ignoreFocusMode: true });\n' +
+    ' grd_exam2.setFocusedMultiCell(1, 1, 3, 2, { ignoreFocusMode: true });\n' +
+    ' grd_exam3.setFocusedMultiCell(1, 1, 3, 2, { ignoreFocusMode: true });\n' +
+    ' grd_exam4.setFocusedMultiCell(1, 1, 3, 2, { ignoreFocusMode: true });\n' +
+    '\n' +
+    ' //포커스 버튼으로 이동.\n' +
+    ' btn_ex4.focus();\n' +
+    '};',
+  'GridView\n' +
+    '[GridView] 셀이 비활성화되었을 때의 셀 배경색, 글자색 지정하기\n' +
+    '〈\n' +
+    '/page/P00189.xmlclassdisabledBackgroundColordisabledFontColorgridgridView그리드뷰\n' +
+    '〉\n' +
+    '예제와 가이드 함께 보기\n' +
+    'GridView의 비활성화 된 셀의 배경색과 글자색을 지정하는 예제입니다.\n' +
+    '이 기능은 속성 disabledBackgroundColor, disabledFontColor에 지정하여 사용할 수 있습니다.\n' +
+    "또는 class 'w2grid_default_disabled'를 재정의하여 지정할 수도 있습니다.\n" +
+    '화면 로딩 후 각 GridView에 cell, column, row 단위를 비활성화하는 스크립트가 작성되어 있습니다.\n' +
+    '비활성화 된 셀의 배경색, 글자색 지정 - 속성\n' +
+    "컬럼 '도서명'의 1번째 행의 셀이 비활성화 되었습니다.\n" +
+    "컬럼 '정가'가 비활성화 되었습니다.\n" +
+    '3번째 행이 비활성화 되었습니다.\n' +
+    '도서명 정가 출간일\n' +
+    '1 사람일까 상황일까 28,000 2019-08-26\n' +
+    '2 내가 틀릴 수도 있습니다 16,000 2022-04-18\n' +
+    '3 공정하다는 착각 18,000 2020-12-01\n' +
+    '4 정글만리 16,500 2013-07-01\n' +
+    '비활성화 된 셀의 배경색, 글자색 지정 - class 정의\n' +
+    "컬럼 '도서명'의 1번째 행의 셀이 비활성화 되었습니다.\n" +
+    "컬럼 '정가'가 비활성화 되었습니다.\n" +
+    '3번째 행이 비활성화 되었습니다.\n' +
+    '도서명 정가 출간일\n' +
+    '1 사람일까 상황일까 28,000 2019-08-26\n' +
+    '2 내가 틀릴 수도 있습니다 16,000 2022-04-18\n' +
+    '3 공정하다는 착각 18,000 2020-12-01\n' +
+    '4 정글만리 16,500 2013-07-01\n' +
+    '비활성화 된 셀의 배경색, 글자색 지정 안함 (기본 설정)\n' +
+    "컬럼 '도서명'의 1번째 행의 셀이 비활성화 되었습니다.\n" +
+    "컬럼 '정가'가 비활성화 되었습니다.\n" +
+    '3번째 행이 비활성화 되었습니다.\n' +
+    '기본 설정은 셀의 style이 변경되지 않습니다.\n' +
+    '도서명 정가 출간일\n' +
+    '1 사람일까 상황일까 28,000 2019-08-26\n' +
+    '2 내가 틀릴 수도 있습니다 16,000 2022-04-18\n' +
+    '3 공정하다는 착각 18,000 2020-12-01\n' +
+    '4 정글만리 16,500 2013-07-01\n' +
+    'See Also\n' +
+    '[GridView] 비활성화 여부 지정하기 - 셀, 컬럼, 로우\n' +
+    '예제 소스\n' +
+    'Script\n' +
+    'Body\n' +
+    'DataCollection\n' +
+    'CSS\n' +
+    'Original Source\n' +
+    'History\n' +
+    'Script\n' +
+    'scwin.onpageload = function () {\n' +
+    '\n' +
+    " //GridView 'grd_exam1'의 컬럼 '도서명'의 1번째 행의 셀을 비활성화 적용하기\n" +
+    ' grd_exam1.setCellDisabled(0, "book_name", true);\n' +
+    " //GridView 'grd_exam1'의 컬럼 '정가'에 비활성화 적용하기\n" +
+    ' grd_exam1.setColumnDisabled("price", true);\n' +
+    " //GridView 'grd_exam1'의 3번째 행에 비활성화 적용하기\n" +
+    ' grd_exam1.setRowDisabled(2, true)\n' +
+    '\n' +
+    " //GridView 'grd_exam2'의 컬럼 '도서명'의 1번째 행의 셀을 비활성화 적용하기\n" +
+    ' grd_exam2.setCellDisabled(0, "book_name", true);\n' +
+    " //GridView 'grd_exam2'의 컬럼 '정가'에 비활성화 적용하기\n" +
+    ' grd_exam2.setColumnDisabled("price", true);\n' +
+    " //GridView 'grd_exam2'의 3번째 행에 비활성화 적용하기\n" +
+    ' grd_exam2.setRowDisabled(2, true)\n' +
+    '\n' +
+    " //GridView 'grd_exam3'의 컬럼 '도서명'의 1번째 행의 셀을 비활성화 적용하기\n" +
+    ' grd_exam3.setCellDisabled(0, "book_name", true);\n' +
+    " //GridView 'grd_exam3'의 컬럼 '정가'에 비활성화 적용하기\n" +
+    ' grd_exam3.setColumnDisabled("price", true);\n' +
+    " //GridView 'grd_exam3'의 3번째 행에 비활성화 적용하기\n" +
+    ' grd_exam3.setRowDisabled(2, true)\n' +
+    '\n' +
+    '};',
+  'GridView\n' +
+    '[GridView] 셀이 편집 모드가 아닐 때, 셀의 문자열 선택 금지 설정하기\n' +
+    '〈\n' +
+    '/page/P00178.xmldraggridgridViewmousenoSelect그리드뷰\n' +
+    '〉\n' +
+    '예제와 가이드 함께 보기\n' +
+    'GridView의 셀의 문자열 선택을 방지 예제입니다.\n' +
+    '이 기능은 속성 noSelect을 true로 설정하여 사용할 수 있습니다.\n' +
+    '키보드 키(ctrl+a 등)를 또는 마우스 드래깅을 통해 문자열이 선택되지 않습니다.\n' +
+    '셀이 편집 모드가 아닌 경우 동작합니다.\n' +
+    '문자열 선택 방지\n' +
+    'GridView의 속성 noSelect=true\n' +
+    '분류 도서명\n' +
+    '1 역사/문화 거의 모든 전쟁의 역사\n' +
+    '2 인문 공정하다는 착각\n' +
+    '3 시/에세이 기분을 관리하면 인생이 관리된다\n' +
+    '(기본 설정) 문자열 선택 가능\n' +
+    'GridView의 속성 noSelect=false\n' +
+    '분류 도서명\n' +
+    '1 역사/문화 거의 모든 전쟁의 역사\n' +
+    '2 인문 공정하다는 착각\n' +
+    '3 시/에세이 기분을 관리하면 인생이 관리된다\n' +
+    '예제 소스\n' +
+    'Script\n' +
+    'Body\n' +
+    'DataCollection\n' +
+    'CSS\n' +
+    'Original Source\n' +
+    'History\n' +
+    'Script\n' +
+    'scwin.onpageload = function () {\n' +
+    ' scwin.setDataList();\n' +
+    '};\n' +
+    '\n' +
+    '/**\n' +
+    ' * DataList에 데이터 할당\n' +
+    ' */\n' +
+    'scwin.setDataList = function () {\n' +
+    ' var arrData = [\n' +
+    ' { "label": "거의 모든 전쟁의 역사", "categoryLabel": "역사/문화" },\n' +
+    ' { "label": "공정하다는 착각", "categoryLabel": "인문" },\n' +
+    ' { "label": "기분을 관리하면 인생이 관리된다", "categoryLabel": "시/에세이" },\n' +
+    ' { "label": "나로서 충분히 괜찮은 사람", "categoryLabel": "시/에세이" },\n' +
+    ' { "label": "내가 틀릴 수도 있습니다", "categoryLabel": "인문" },\n' +
+    ' { "label": "마음의 법칙", "categoryLabel": "인문" },\n' +
+    ' { "label": "무엇이 옳은가", "categoryLabel": "인문" }\n' +
+    ' ];\n' +
+    '\n' +
+    ' dlt_books_1.setJSON(arrData);\n' +
+    '};',
+  'GridView\n' +
+    '[GridView] 엑셀 다운로드 시 다운로드할 데이터 출처 설정하기\n' +
+    '〈\n' +
+    '/page/P00106.xmladvancedExcelDownloadgridgridViewtype그리드뷰\n' +
+    '〉\n' +
+    '예제와 가이드 함께 보기\n' +
+    'GridView의 엑셀 다운로드 옵션 중 "type" 설정의 예제입니다.\n' +
+    '옵션 "type"은 데이터의 출처를 결정합니다.\n' +
+    'DataList의 데이터 또는 GridView에 출력된 데이터로 지정할 수 있습니다.\n' +
+    '기본 설정은 GridView에 출력된 데이터로 다운로드 됩니다.\n' +
+    'type:1 - GridView에 출력된 값\n' +
+    'type:0 - DataList에 할당된 값\n' +
+    '분류 도서명 정가 출간일\n' +
+    '1\n' +
+    '인문\n' +
+    '사람일까 상황일까 28,000 2019-08-26\n' +
+    '2\n' +
+    '인문\n' +
+    '내가 틀릴 수도 있습니다 16,000 2022-04-18\n' +
+    '3\n' +
+    '소설\n' +
+    '어린왕자 2,000 1981-08-01\n' +
+    '4\n' +
+    '인문\n' +
+    '공정하다는 착각 18,000 2020-12-01\n' +
+    '예제 소스\n' +
+    'Script\n' +
+    'Body\n' +
+    'DataCollection\n' +
+    'CSS\n' +
+    'Original Source\n' +
+    'History\n' +
+    'Script\n' +
+    'scwin.onpageload = function () {\n' +
+    '\n' +
+    '};\n' +
+    '\n' +
+    '/**\n' +
+    ' * 버튼 [엑셀 다운로드 - 기본] 클릭 시\n' +
+    ' */\n' +
+    'scwin.btn_ex1_onclick = function (e) {\n' +
+    ' var jsnOptions;\n' +
+    '\n' +
+    ' jsnOptions = {\n' +
+    ' fileName: "SP5_EXAMPLE_P00106_TYPE1.xlsx"\n' +
+    ' };\n' +
+    '\n' +
+    ' grd_exam1.advancedExcelDownload(jsnOptions);\n' +
+    '};\n' +
+    '\n' +
+    '/**\n' +
+    ' * 버튼 [엑셀 다운로드 - DataList의 값을 다운로드] 클릭 시\n' +
+    ' */\n' +
+    'scwin.btn_ex2_onclick = function (e) {\n' +
+    ' var jsnOptions;\n' +
+    '\n' +
+    ' jsnOptions = {\n' +
+    ' fileName: "SP5_EXAMPLE_P00106_TYPE2.xlsx", //엑셀의 파일명\n' +
+    ' type: 0 //[default:1, 0] 사용할 데이터 출처. 0: DataList의 데이터 사용. 1: GridView에 출력된 데이터 사용\n' +
+    ' };\n' +
+    '\n' +
+    ' //GridView "grd_exam1"의 엑셀 다운로드 실행\n' +
+    ' grd_exam1.advancedExcelDownload(jsnOptions);\n' +
+    '};',
+  'GridView\n' +
+    '[GridView] 엑셀 다운로드 시 다운로드할 데이터 출처를 컬럼별로 설정하기\n' +
+    '〈\n' +
+    '/page/P00107.xmladvancedExcelDownloadconvertIndexgridgridViewtype그리드뷰\n' +
+    '〉\n' +
+    '예제와 가이드 함께 보기\n' +
+    'GridView의 엑셀 다운로드 옵션 중 "convertIndex" 설정의 예제입니다.\n' +
+    '옵션 "convertIndex"은 지정한 index의 컬럼의 type을 기본 설정값과 반대의 설정으로 지정합니다.\n' +
+    '옵션 "type"의 값이 "1"으로 지정되면 converIndex에 해당하는 컬럼은 type이 "0"인 값으로 할당됩니다.\n' +
+    '분류 도서명 정가 출간일\n' +
+    '1\n' +
+    '인문\n' +
+    '사람일까 상황일까 28,000 2019-08-26\n' +
+    '2\n' +
+    '인문\n' +
+    '내가 틀릴 수도 있습니다 16,000 2022-04-18\n' +
+    '3\n' +
+    '소설\n' +
+    '어린왕자 2,000 1981-08-01\n' +
+    '4\n' +
+    '인문\n' +
+    '공정하다는 착각 18,000 2020-12-01\n' +
+    '예제 소스\n' +
+    'Script\n' +
+    'Body\n' +
+    'DataCollection\n' +
+    'CSS\n' +
+    'Original Source\n' +
+    'History\n' +
+    'Script\n' +
+    'scwin.onpageload = function () {\n' +
+    '\n' +
+    '};\n' +
+    '\n' +
+    '/**\n' +
+    ' * 버튼 [엑셀 다운로드 - 기본] 클릭 시\n' +
+    ' */\n' +
+    'scwin.btn_ex1_onclick = function (e) {\n' +
+    ' var jsnOptions;\n' +
+    '\n' +
+    ' jsnOptions = {\n' +
+    ' fileName: "SP5_EXAMPLE_P00107_TYPE1.xlsx"\n' +
+    ' };\n' +
+    '\n' +
+    ' grd_exam1.advancedExcelDownload(jsnOptions);\n' +
+    '};\n' +
+    '\n' +
+    '/**\n' +
+    ' * 버튼 [엑셀 다운로드 - 컬럼 "분류" 만 DataList의 값으로 다운로드] 클릭 시\n' +
+    ' */\n' +
+    'scwin.btn_ex2_onclick = function (e) {\n' +
+    ' var jsnOptions;\n' +
+    '\n' +
+    ' jsnOptions = {\n' +
+    ' fileName: "SP5_EXAMPLE_P00107_TYPE2.xlsx", //엑셀의 파일명\n' +
+    ' convertIndex: "0" //0번째 컬럼만 DataList의 값으로 다운로드. type 옵션의 기본값은 1(GridView에 출력된 값)입니다.\n' +
+    ' };\n' +
+    '\n' +
+    ' //GridView "grd_exam1"의 엑셀 다운로드 실행\n' +
+    ' grd_exam1.advancedExcelDownload(jsnOptions);\n' +
+    '};',
+  'GridView\n' +
+    '[GridView] 엑셀 다운로드 시 데이터의 좌우 공백 제거하기\n' +
+    '〈\n' +
+    '/page/P00232.xmladvancedExcelDownloadgridgridViewtrim그리드뷰\n' +
+    '〉\n' +
+    '예제와 가이드 함께 보기\n' +
+    "GridView의 엑셀 다운로드(함수 'advancedExcelDownload') 옵션 중 'trim' 설정의 예제입니다.\n" +
+    "옵션 'trim'은 데이터의 좌우 공백 제거의 여부를 지정할 수 있습니다.\n" +
+    'false : (기본 값) 좌우 공백 제거하지 않음\n' +
+    'true : 좌우 공백 제거\n' +
+    "다운로드된 엑셀 파일의 컬럼 '도서명'의 데이터의 좌우 공백을 비교합니다.\n" +
+    "이 예제는 데이터의 좌우 공백을 표현하기 위해 컬럼 '도서명'에 class 'P00000_preColumn'이 적용되어 있습니다.\n" +
+    '도서명 정가\n' +
+    '1    사람일까 상황일까    28,000\n' +
+    '2       내가 틀릴 수도 있습니다 16,000\n' +
+    '3   공정하다는 착각   18,000\n' +
+    '4 불편한 편의점 14,000\n' +
+    '예제 소스\n' +
+    'Script\n' +
+    'Body\n' +
+    'DataCollection\n' +
+    'CSS\n' +
+    'Original Source\n' +
+    'History\n' +
+    'Script\n' +
+    'scwin.onpageload = function () {\n' +
+    '\n' +
+    '};\n' +
+    '\n' +
+    '/**\n' +
+    ' * 버튼 [엑셀 다운로드 - 기본] 클릭 시\n' +
+    ' */\n' +
+    'scwin.btn_ex1_onclick = function (e) {\n' +
+    ' var jsnOptions;\n' +
+    '\n' +
+    ' jsnOptions = {\n' +
+    ' fileName: "SP5_EXAMPLE_P00232_TYPE1.xlsx"\n' +
+    ' };\n' +
+    '\n' +
+    ' grd_exam1.advancedExcelDownload(jsnOptions);\n' +
+    '};\n' +
+    '\n' +
+    '/**\n' +
+    ' * 버튼 [엑셀 다운로드 - 데이터 좌우 공백 제거] 클릭 시\n' +
+    ' */\n' +
+    'scwin.btn_ex2_onclick = function (e) {\n' +
+    ' var jsnOptions;\n' +
+    '\n' +
+    ' jsnOptions = {\n' +
+    ' fileName: "SP5_EXAMPLE_P00232_TYPE2.xlsx", //엑셀의 파일명\n' +
+    ' trim: "true" //데이터 좌우 공백 제거\n' +
+    ' };\n' +
+    ' //options.trim <String:N> [default: false] gridView 데이터를 좌우 공백 적용 유무 (true 설정시 공백 제거 후 적용)\n' +
+    '\n' +
+    ' //GridView "grd_exam1"의 엑셀 다운로드 실행\n' +
+    ' grd_exam1.advancedExcelDownload(jsnOptions);\n' +
+    '};',
+  'GridView\n' +
+    '[GridView] 엑셀 다운로드 시 데이터의 타입(유형) 지정하기\n' +
+    '〈\n' +
+    '/page/P00110.xmladvancedExcelDownloadexcelCellTypegridgridViewuseDataFormat그리드뷰\n' +
+    '〉\n' +
+    '예제와 가이드 함께 보기\n' +
+    'GridView의 엑셀 다운로드 시 엑셀에 설정할 셀의 데이터의 타입(유형)을 지정하는 예제입니다.\n' +
+    '이 기능은 엑셀 다운로드 옵션 "useDataFormat"과 GridView 컬럼의 excelCellType 속성을 통해 사용할 수 있습니다.\n' +
+    'GridView에는 숫자(number)형과 날짜(date)형 데이터가 각 컬럼에 할당되었습니다.\n' +
+    'GridView의 헤더에 "no excelCellType" 문자열이 포함된 경우는 excelCellType 속성이 지정되지 않았습니다.\n' +
+    '각 엑셀 다운로드 버튼을 클릭하여 엑셀을 다운로드 합니다.\n' +
+    '다운로드된 엑셀의 셀의 "표현 형식"에 설정된 값을 비교합니다.\n' +
+    'number 1\n' +
+    'no excelCellType number 2 date 1\n' +
+    'no excelCellType date 2\n' +
+    '2345600 2345600 2023-04-27 2023-04-27\n' +
+    '78900 78900 2023-04-27 2023-04-27\n' +
+    '예제 소스\n' +
+    'Script\n' +
+    'Body\n' +
+    'DataCollection\n' +
+    'CSS\n' +
+    'Original Source\n' +
+    'History\n' +
+    'Script\n' +
+    'scwin.onpageload = function () {\n' +
+    ' scwin.initPage();\n' +
+    '};\n' +
+    '\n' +
+    '/**\n' +
+    ' * 화면 초기화\n' +
+    ' */\n' +
+    'scwin.initPage = function () {\n' +
+    ' var strCurDate;\n' +
+    '\n' +
+    ' strCurDate = $p.getCurrentServerDate("yyyyMMdd");\n' +
+    '\n' +
+    ' dlt_excel.setJSON([\n' +
+    ' { "number_1": "2345600", "number_2": "2345600", "date_1": strCurDate, "date_2": strCurDate },\n' +
+    ' { "number_1": "78900", "number_2": "78900", "date_1": strCurDate, "date_2": strCurDate }\n' +
+    ' ]);\n' +
+    '};\n' +
+    '\n' +
+    '/**\n' +
+    ' * 버튼 [엑셀 다운로드 - 기본] 클릭 시\n' +
+    ' */\n' +
+    'scwin.btn_ex1_onclick = function (e) {\n' +
+    ' var jsnOptions;\n' +
+    '\n' +
+    ' jsnOptions = {\n' +
+    ' fileName: "SP5_EXAMPLE_P00110_default.xlsx"\n' +
+    ' };\n' +
+    '\n' +
+    ' //GridView의 엑셀다운로드 API를 호출합니다.\n' +
+    ' grd_exam1.advancedExcelDownload(jsnOptions);\n' +
+    '};\n' +
+    '\n' +
+    '/**\n' +
+    ' * 버튼 [엑셀 다운로드 - useDataFormat 설정] 클릭 시\n' +
+    ' */\n' +
+    'scwin.btn_ex2_onclick = function (e) {\n' +
+    ' var jsnOptions;\n' +
+    '\n' +
+    ' jsnOptions = {\n' +
+    ' fileName: "SP5_EXAMPLE_P00110_useDataFormat.xlsx",\n' +
+    ` useDataFormat: true //[default: 없음] "true"인 경우 dataType에 따라 Excel 파일에 표시 형식을 출력. dataType="text"인 셀은 Excel의 표시형식에 '텍스트' 출력, dataType="number" 혹은 "bigDecimal" 셀은 "숫자" 출력.\n` +
+    ' };\n' +
+    '\n' +
+    ' //GridView의 엑셀다운로드 API를 호출합니다. \n' +
+    ' grd_exam1.advancedExcelDownload(jsnOptions);\n' +
+    '};',
+  ... 93 more items
+]
+^C
+jihyun@ijihyeon-ui-MacBook-Pro ws-guide-app % node index.js
+2023-04-27 02:00:44.922226: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Server is running : port 3000
+tokenedData------------------------------
+RUN EMBEDDING
+{
+  status: 200,
+  statusText: 'OK',
+  headers: {
+    date: 'Wed, 26 Apr 2023 17:00:48 GMT',
+    'content-type': 'application/json',
+    'content-length': '6429337',
+    connection: 'close',
+    'access-control-allow-origin': '*',
+    'openai-organization': 'inswave-systems',
+    'openai-processing-ms': '890',
+    'openai-version': '2020-10-01',
+    'strict-transport-security': 'max-age=15724800; includeSubDomains',
+    'x-ratelimit-limit-requests': '3000',
+    'x-ratelimit-remaining-requests': '2999',
+    'x-ratelimit-reset-requests': '20ms',
+    'x-request-id': 'f74afa6b3bf00de3b7ea939308881d8e',
+    'cf-cache-status': 'DYNAMIC',
+    server: 'cloudflare',
+    'cf-ray': '7be062457c24a7c6-ICN',
+    'alt-svc': 'h3=":443"; ma=86400, h3-29=":443"; ma=86400'
+  },
+  config: {
+    transitional: {
+      silentJSONParsing: true,
+      forcedJSONParsing: true,
+      clarifyTimeoutError: false
+    },
+    adapter: [Function: httpAdapter],
+    transformRequest: [ [Function: transformRequest] ],
+    transformResponse: [ [Function: transformResponse] ],
+    timeout: 0,
+    xsrfCookieName: 'XSRF-TOKEN',
+    xsrfHeaderName: 'X-XSRF-TOKEN',
+    maxContentLength: -1,
+    maxBodyLength: -1,
+    validateStatus: [Function: validateStatus],
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'Content-Type': 'application/json',
+      'User-Agent': 'OpenAI/NodeJS/3.2.1',
+      Authorization: 'Bearer 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',
+      'Content-Length': 432882
+    },
+    method: 'post',
+    data: `{"model":"text-embedding-ada-002","input":["컴포넌트 공통\\n[컴포넌트 공통] 스크립트로 class 제어하기\\n〈\\n/page/P00029.xmladdClasschangeClassclasshasClassremoveClasstoggleClass\\n〉\\n예제와 가이드 함께 보기\\n컴포넌트의 class를 제어하는 API 사용 예제입니다.\\n아래의 API로 class를 제어 할 수 있습니다.\\n- class 추가 : addClass\\n- class 변경 : changeClass\\n- class 제거 : removeClass\\n- class 토글 : toggleClass\\n- class 유무 확인 : hasClass\\nclass 추가하기\\nInput 컴포넌트에 class \\"P00029_exam1\\"를 추가합니다.\\nclass 변경하기\\nInput 컴포넌트에 정의된 class \\"P00029_exam1\\"를 \\"P00029_exam2\\"로 변경합니다.\\nclass 제거하기\\nInput 컴포넌트에 정의된 class \\"P00029_exam1\\"를 제거합니다.\\nclass 토글하기\\nInput 컴포넌트에 정의된 class \\"P00029_exam2\\"를 토글합니다.\\nclass 유무 반환받기\\nInput 컴포넌트에 class \\"P00029_exam1\\"의 유무를 반환합니다.\\n예제 소스\\nScript\\nBody\\nDataCollection\\nCSS\\nOriginal Source\\nHistory\\nScript\\nscwin.onpageload = function () {\\n\\n};\\n\\n/**\\n * [InputBox에 class 추가하기] 클릭 시\\n * [컴포넌트 ID].addClass(className);\\n * ex) ibx_exam1.addClass(\\"P00029_exam1\\");\\n */\\nscwin.btn_ex1_onclick = function (e) {\\n //컴포넌트의 class 속성에 \\"P00029_exam1\\" 추가하기\\n ibx_exam1.addClass(\\"P00029_exam1\\");\\n};\\n\\n/**\\n * [InputBox의 class 변경하기] 클릭 시\\n * [컴포넌트 ID].changeClass(oldClassName, newClassName);\\n * ex) ibx_exam2.changeClass(\\"P00029_exam1\\", \\"P00029_exam2\\");\\n */\\nscwin.btn_ex2_onclick = function (e) {\\n //컴포넌트의 class 속성에 정의된 \\"P00029_exam1\\" class 제거하고 \\"P00029_exam2\\"를 추가한다.\\n //oldClassName이 정의되어 있지 않은 경우에도 newClassName가 추가된다.\\n ibx_exam2.changeClass(\\"P00029_exam1\\", \\"P00029_exam2\\");\\n};\\n\\n/**\\n * [InputBox의 class 제거하기] 클릭 시 - P00029_exam1 class를 삭제합니다.\\n * [컴포넌트 ID].removeClass(className);\\n * ex) ibx_exam3.removeClass(\\"P00029_exam1\\");\\n */\\nscwin.btn_ex3_onclick = function (e) {\\n //컴포넌트의 class 속성에 정의된 \\"P00029_exam1\\" class를 제거한다.\\n ibx_exam3.removeClass(\\"P00029_exam1\\");\\n};\\n\\n/**\\n * [InputBox의 class 토글하기] 클릭 시\\n * [컴포넌트 ID].toggleClass(className);\\n * ex) ibx_exam4.toggleClass(\\"P00029_exam2\\");\\n */\\nscwin.btn_ex4_onclick = function (e) {\\n //컴포넌트의 class 속성에 정의된 \\"P00029_exam2\\" class를 토글한다.\\n ibx_exam4.toggleClass(\\"P00029_exam2\\");\\n};\\n\\n/**\\n * [InputBox의 class 유무 판단하기] 클릭 시\\n * [컴포넌트 ID].hasClass(className);\\n * ex) ibx_exam5.hasClass(\\"P00029_exam1\\");\\n */\\nscwin.btn_ex5_onclick = function (e) {\\n var tmpRet;\\n var strLog;\\n\\n //컴포넌트의 class 속성에 정의된 \\"P00029_exam1\\" 존재 유무를 boolean으로 반환한다.\\n tmpRet = ibx_exam5.hasClass(\\"P00029_exam1\\");\\n\\n strLog = \\"반환값 : \\" + tmpRet + \\" (data type : \\" + typeof tmpRet + \\")\\";\\n\\n //반환값 alert\\n alert(strLog);\\n};","컴포넌트 공통\\n[컴포넌트 공통] 스크립트로 style 제어하기\\n〈\\n/page/P00028.xmlgetInitStylegetStylesetInitStylesetStylestyle\\n〉\\n예제와 가이드 함께 보기\\n컴포넌트의 style를 제어하는 API 사용 예제입니다.\\n영역 [로그 확인]에서 실행 스크립트를 확인할 수 있습니다.\\n아래의 API로 CSS 속성을 제어 할 수 있습니다.\\n- CSS 속성값 설정 : setStyle\\n- CSS 속성값 반환 : getStyle\\n- 초기 CSS 속성값으로 복구 : setInitStyle\\n- 초기 CSS 속성값 반환 : getInitStyle\\nstyle 할당하기\\nInputBox의 style 속성 border-color를 변경합니다.\\nstyle 속성값 반환받기\\nInputBox의 style 속성 border-color의 값을 alert 합니다.\\nstyle 속성값을 초기 값으로 할당하기\\n버튼을 순서대로 클릭하여 실행 결과를 확인합니다.\\n초기 style 속성값 반환받기\\n버튼을 순서대로 클릭하여 실행 결과를 확인합니다.\\n로그 확인\\n예제 소스\\nScript\\nBody\\nDataCollection\\nCSS\\nOriginal Source\\nHistory\\nScript\\nscwin.onpageload = function () {\\n\\n};\\n\\n/**\\n * 영역 [style 할당하기]의 \\n * 버튼 [border-color 변경하기] 클릭 시\\n * [컴포넌트 ID].setStyle(style 속성명, 값);\\n * ex) ibx_exam1.setStyle(\\"border-color\\", \\"red\\");\\n */\\nscwin.btn_ex1_onclick = function (e) {\\n //로그 출력\\n $c.frame.printExampleLog(\\"** scwin.btn_ex1_onclick 실행 **\\", txa_log, false);\\n //로그 출력\\n $c.frame.printExampleLog('ibx_exam1.setStyle(\\"border-color\\", \\"red\\");', txa_log, false);\\n\\n ibx_exam1.setStyle(\\"border-color\\", \\"red\\");\\n};\\n\\n/**\\n * 영역 [style 속성값 반환받기]의\\n * 버튼 [border-color 속성값 반환받기] 클릭 시\\n * [컴포넌트 ID].getStyle(style 속성명);\\n * ex) ibx_exam2.getStyle(\\"border-color\\");\\n */\\nscwin.btn_ex2_onclick = function (e) {\\n var strRet;\\n\\n //로그 출력\\n $c.frame.printExampleLog(\\"** scwin.btn_ex2_onclick 실행 **\\", txa_log, false);\\n //로그 출력\\n $c.frame.printExampleLog('ibx_exam2.getStyle(\\"border-color\\");', txa_log, false);\\n\\n //inputbox의 border-color style 값 반환받기.\\n strRet = ibx_exam2.getStyle(\\"border-color\\");\\n\\n //반환값 로그 출력\\n $c.frame.printExampleLog('반환값 : ' + strRet, txa_log, false);\\n\\n //반환값 alert\\n alert(strRet);\\n};\\n\\n/**\\n * 영역 [style 속성값을 초기 값으로 할당하기]의 \\n * 버튼 [1. color 변경하기] 클릭 시\\n * [컴포넌트 ID].setStyle(style 속성명, 값);\\n * ex) ibx_exam3.setStyle(\\"color\\", \\"red\\");\\n */\\nscwin.btn_ex3_1_onclick = function (e) {\\n //로그 출력\\n $c.frame.printExampleLog(\\"** scwin.btn_ex3_1_onclick 실행 **\\", txa_log, false);\\n //로그 출력\\n $c.frame.printExampleLog('ibx_exam3.setStyle(\\"color\\", \\"red\\");', txa_log, false);\\n\\n //컴포넌트의 style 속성 중 color를 할당합니다.\\n ibx_exam3.setStyle(\\"color\\", \\"red\\");\\n};\\n\\n/**\\n * 영역 [style 속성값을 초기 값으로 할당하기]의 \\n * [2. color 속성값을 초기값으로 할당하기] 클릭 시\\n * [컴포넌트 ID].setInitStyle(style 속성명, 값);\\n * ex) ibx_exam3.setInitStyle(\\"color\\");\\n */\\nscwin.btn_ex3_2_onclick = function (e) {\\n //로그 출력\\n $c.frame.printExampleLog(\\"** scwin.btn_ex3_onclick 실행 **\\", txa_log, false);\\n //로그 출력\\n $c.frame.printExampleLog('ibx_exam3.setInitStyle(\\"color\\");', txa_log, false);\\n\\n //컴포넌트의 style 속성 중 color를 초기값으로 복구합니다.\\n ibx_exam3.setInitStyle(\\"color\\");\\n};\\n\\n\\n/**\\n * 영역 [초기 style 속성값 반환받기]의 \\n * 버튼 [1. border-color 변경하기] 클릭 시\\n * [컴포넌트 ID].setStyle(style 속성명, 값);\\n * ex) ibx_exam4.setStyle(\\"border-color\\", \\"blue\\");\\n */\\nscwin.btn_ex4_1_onclick = function (e) {\\n //로그 출력\\n $c.frame.printExampleLog(\\"** scwin.btn_ex4_1_onclick 실행 **\\", txa_log, false);\\n //로그 출력\\n $c.frame.printExampleLog('ibx_exam4.setStyle(\\"border-color\\", \\"blue\\");', txa_log, false);\\n\\n //컴포넌트의 style 속성 중 border-color를 할당합니다.\\n ibx_exam4.setStyle(\\"border-color\\", \\"blue\\");\\n};\\n\\n/**\\n * 영역 [초기 style 속성값 반환받기]의 \\n * 버튼 [2. 초기 border-color 값 반환받기] 클릭 시\\n * [컴포넌트 ID].getInitStyle(style 속성명);\\n * ex) ibx_exam4.getInitStyle(\\"border-color\\");\\n */\\nscwin.btn_ex4_2_onclick = function (e) {\\n var strRet;\\n\\n //로그 출력\\n $c.frame.printExampleLog(\\"** scwin.btn_ex4_onclick 실행 **\\", txa_log, false);\\n //로그 출력\\n $c.frame.printExampleLog('ibx_exam4.getInitStyle(\\"border-color\\");', txa_log, false);\\n\\n //inputbox의 초기 border-color style 값 반환받기.\\n strRet = ibx_exam4.getInitStyle(\\"border-color\\");\\n\\n //console에 반환값 출력\\n console.log(strRet);\\n\\n if ($.isPlainObject(strRet)) {\\n strRet = JSON.stringify(strRet, null, \\"\\\\t\\");\\n }\\n\\n //반환값 로그 출력\\n $c.frame.printExampleLog('반환값 : ' + strRet, txa_log, false);\\n\\n //반환값 alert\\n alert(strRet);\\n};\\n\\n/**\\n * textarea의 로그 삭제\\n */\\nscwin.btn_clearLog_onclick = function (e) {\\n txa_log.setValue(\\"\\");\\n};","컴포넌트 공통\\n[컴포넌트 공통] 스크립트로 이벤트 연결(추가)하기\\n〈\\n/page/P00034.xmlbindevent\\n〉\\n예제와 가이드 함께 보기\\n컴포넌트의 API bind의 예제입니다.\\nbind는 이벤트 핸들러를 추가하는 기능을 제공합니다.\\n컴포넌트의 이벤트 발생 시 영역 [로그 확인]의 textarea에 로그가 출력됩니다.\\n이벤트 연결하기\\ntrigger에 onclick 이벤트 핸들러를 연결합니다.\\n[테스트 버튼1]에는 등록된 이벤트가 없습니다.\\n로그 확인\\n예제 소스\\nScript\\nBody\\nDataCollection\\nCSS\\nOriginal Source\\nHistory\\nScript\\nscwin.onpageload = function () {\\n\\n};\\n\\n/**\\n * 예제 테스트를 위한 공용 onclick 핸들러\\n */\\nscwin.btn_example_test_onclick_user = function (e) {\\n var strLog;\\n\\n //로그 출력\\n strLog = \\"[공용] onclick 이벤트 핸들러 - 함수 scwin.btn_example_test_onclick_user\\";\\n $c.frame.printExampleLog(strLog, txa_log, false);\\n console.log(strLog);\\n\\n};\\n\\n/**\\n * 영역 [이벤트 연결하기]의\\n * 버튼 [이벤트 연결 - bind] 클릭 시\\n * [컴포넌트 ID].bind( eventType , function );\\n */\\nscwin.btn_ex1_onclick = function (e) {\\n var strLog;\\n\\n //로그 출력\\n strLog = \\"** 함수 scwin.btn_ex1_onclick **\\";\\n $c.frame.printExampleLog(strLog, txa_log, false);\\n console.log(strLog);\\n strLog = 'btn_exam_test1.bind(\\"onclick\\", scwin.btn_example_test_onclick_user);';\\n $c.frame.printExampleLog(strLog, txa_log, false);\\n console.log(strLog);\\n\\n //버튼 [테스트 버튼 1]에 onclick 이벤트 핸들러(scwin.btn_example_test_onclick_user) 연결\\n btn_exam_test1.bind(\\"onclick\\", scwin.btn_example_test_onclick_user);\\n};\\n\\n/**\\n * textarea의 로그 삭제\\n */\\nscwin.btn_clearLog_onclick = function (e) {\\n txa_log.setValue(\\"\\");\\n};","컴포넌트 공통\\n[컴포넌트 공통] 스크립트로 이벤트 해제(제거)하기\\n〈\\n/page/P00164.xmleventunbind\\n〉\\n예제와 가이드 함께 보기\\n컴포넌트의 API unbind의 예제입니다.\\nunbind는 이벤트 핸들러를 제거하는 기능을 제공합니다.\\n컴포넌트의 이벤트 발생 시 영역 [로그 확인]의 textarea에 로그가 출력됩니다.\\n모든 이벤트의 모든 핸들러 제거하기\\ntrigger에 모든 이벤트 핸들러를 제거합니다.\\n[테스트 버튼2]에는 onclick 핸들러 1개, onmouseup 핸들러 1개가 등록되어있습니다.\\n특정 이벤트의 모든 핸들러 제거하기\\ntrigger의 onclick 이벤트의 모든 핸들러를 제거합니다.\\n[테스트 버튼3]에는 onclick 핸들러 2개, onmouseup 핸들러 1개가 등록되어있습니다.\\n특정 이벤트의 특정 핸들러 제거하기\\ntrigger의 onclick 이벤트의 핸들러 [scwin.btn_example_test_onclick_user]를 제거합니다.\\n[테스트 버튼4]에는 onclick 핸들러 2개가 등록되어있습니다.\\n로그 확인\\n예제 소스\\nScript\\nBody\\nDataCollection\\nCSS\\nOriginal Source\\nHistory\\nScript\\nscwin.onpageload = function () {\\n\\n //예제 테스트를 위해 버튼 [테스트 버튼 3]에 onclick 핸들러를 연결합니다.\\n btn_exam_test3.bind(\\"onclick\\", scwin.btn_example_test_onclick_user);\\n\\n //예제 테스트를 위해 버튼 [테스트 버튼 4]에 onclick 핸들러를 연결합니다.\\n btn_exam_test4.bind(\\"onclick\\", scwin.btn_example_test_onclick_user);\\n\\n};\\n\\n\\n/**\\n * 예제 테스트를 위한 공용 onclick 핸들러\\n */\\nscwin.btn_example_test_onclick_user = function (e) {\\n var strLog;\\n\\n //로그 출력\\n strLog = \\"[공용] onclick 이벤트 핸들러 - 함수 scwin.btn_example_test_onclick_user\\";\\n $c.frame.printExampleLog(strLog, txa_log, false);\\n console.log(strLog);\\n\\n};\\n\\n/**\\n * 영역 [모든 이벤트의 모든 핸들러 제거하기]의\\n * 버튼 [모든 이벤트의 모든 핸들러 제거하기 - unbind] 클릭 시\\n * [컴포넌트 ID].unbind();\\n */\\nscwin.btn_ex2_onclick = function (e) {\\n var strLog;\\n\\n //로그 출력\\n strLog = \\"** 함수 scwin.btn_ex2_onclick **\\";\\n $c.frame.printExampleLog(strLog, txa_log, false);\\n console.log(strLog);\\n strLog = 'btn_exam_test2.unbind();';\\n $c.frame.printExampleLog(strLog, txa_log, false);\\n console.log(strLog);\\n\\n //버튼 [테스트 버튼 2]의 모든 이벤트의 모든 핸들러 모두 제거\\n btn_exam_test2.unbind();\\n};\\n\\n/**\\n * 영역 [모든 이벤트의 모든 핸들러 제거하기]의\\n * 버튼 [테스트 버튼 2]의 onclick 핸들러\\n */\\nscwin.btn_exam_test2_onclick = function (e) {\\n //로그 출력\\n $c.frame.printExampleLog(\\"[테스트 버튼 2] - onclick 발생 - 함수 scwin.btn_exam_test2_onclick\\", txa_log, false);\\n};\\n\\n/**\\n * 영역 [모든 이벤트의 모든 핸들러 제거하기]의\\n * 버튼 [테스트 버튼 2]의 onmouseup 핸들러\\n */\\nscwin.btn_exam_test2_onmouseup = function (e) {\\n //로그 출력\\n $c.frame.printExampleLog(\\"[테스트 버튼 2] -`... 302516 more characters,
+    url: 'https://api.openai.com/v1/embeddings'
+  },
+  request: <ref *1> ClientRequest {
+    _events: [Object: null prototype] {
+      abort: [Function (anonymous)],
+      aborted: [Function (anonymous)],
+      connect: [Function (anonymous)],
+      error: [Function (anonymous)],
+      socket: [Function (anonymous)],
+      timeout: [Function (anonymous)],
+      prefinish: [Function: requestOnPrefinish]
+    },
+    _eventsCount: 7,
+    _maxListeners: undefined,
+    outputData: [],
+    outputSize: 0,
+    writable: true,
+    destroyed: false,
+    _last: true,
+    chunkedEncoding: false,
+    shouldKeepAlive: false,
+    maxRequestsOnConnectionReached: false,
+    _defaultKeepAlive: true,
+    useChunkedEncodingByDefault: true,
+    sendDate: false,
+    _removedConnection: false,
+    _removedContLen: false,
+    _removedTE: false,
+    _contentLength: null,
+    _hasBody: true,
+    _trailer: '',
+    finished: true,
+    _headerSent: true,
+    _closed: false,
+    socket: TLSSocket {
+      _tlsOptions: [Object],
+      _secureEstablished: true,
+      _securePending: false,
+      _newSessionPending: false,
+      _controlReleased: true,
+      secureConnecting: false,
+      _SNICallback: null,
+      servername: 'api.openai.com',
+      alpnProtocol: false,
+      authorized: true,
+      authorizationError: null,
+      encrypted: true,
+      _events: [Object: null prototype],
+      _eventsCount: 10,
+      connecting: false,
+      _hadError: false,
+      _parent: null,
+      _host: 'api.openai.com',
+      _readableState: [ReadableState],
+      _maxListeners: undefined,
+      _writableState: [WritableState],
+      allowHalfOpen: false,
+      _sockname: null,
+      _pendingData: null,
+      _pendingEncoding: '',
+      server: undefined,
+      _server: null,
+      ssl: [TLSWrap],
+      _requestCert: true,
+      _rejectUnauthorized: true,
+      parser: null,
+      _httpMessage: [Circular *1],
+      [Symbol(res)]: [TLSWrap],
+      [Symbol(verified)]: true,
+      [Symbol(pendingSession)]: null,
+      [Symbol(async_id_symbol)]: 13,
+      [Symbol(kHandle)]: [TLSWrap],
+      [Symbol(kSetNoDelay)]: false,
+      [Symbol(lastWriteQueueSize)]: 0,
+      [Symbol(timeout)]: null,
+      [Symbol(kBuffer)]: null,
+      [Symbol(kBufferCb)]: null,
+      [Symbol(kBufferGen)]: null,
+      [Symbol(kCapture)]: false,
+      [Symbol(kBytesRead)]: 0,
+      [Symbol(kBytesWritten)]: 0,
+      [Symbol(connect-options)]: [Object],
+      [Symbol(RequestTimeout)]: undefined
+    },
+    _header: 'POST /v1/embeddings HTTP/1.1\r\n' +
+      'Accept: application/json, text/plain, */*\r\n' +
+      'Content-Type: application/json\r\n' +
+      'User-Agent: OpenAI/NodeJS/3.2.1\r\n' +
+      'Authorization: Bearer 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\r\n' +
+      'Content-Length: 432882\r\n' +
+      'Host: api.openai.com\r\n' +
+      'Connection: close\r\n' +
+      '\r\n',
+    _keepAliveTimeout: 0,
+    _onPendingData: [Function: nop],
+    agent: Agent {
+      _events: [Object: null prototype],
+      _eventsCount: 2,
+      _maxListeners: undefined,
+      defaultPort: 443,
+      protocol: 'https:',
+      options: [Object: null prototype],
+      requests: [Object: null prototype] {},
+      sockets: [Object: null prototype],
+      freeSockets: [Object: null prototype] {},
+      keepAliveMsecs: 1000,
+      keepAlive: false,
+      maxSockets: Infinity,
+      maxFreeSockets: 256,
+      scheduling: 'lifo',
+      maxTotalSockets: Infinity,
+      totalSocketCount: 1,
+      maxCachedSessions: 100,
+      _sessionCache: [Object],
+      [Symbol(kCapture)]: false
+    },
+    socketPath: undefined,
+    method: 'POST',
+    maxHeaderSize: undefined,
+    insecureHTTPParser: undefined,
+    path: '/v1/embeddings',
+    _ended: true,
+    res: IncomingMessage {
+      _readableState: [ReadableState],
+      _events: [Object: null prototype],
+      _eventsCount: 4,
+      _maxListeners: undefined,
+      socket: [TLSSocket],
+      httpVersionMajor: 1,
+      httpVersionMinor: 1,
+      httpVersion: '1.1',
+      complete: true,
+      rawHeaders: [Array],
+      rawTrailers: [],
+      aborted: false,
+      upgrade: false,
+      url: '',
+      method: null,
+      statusCode: 200,
+      statusMessage: 'OK',
+      client: [TLSSocket],
+      _consuming: true,
+      _dumped: false,
+      req: [Circular *1],
+      responseUrl: 'https://api.openai.com/v1/embeddings',
+      redirects: [],
+      [Symbol(kCapture)]: false,
+      [Symbol(kHeaders)]: [Object],
+      [Symbol(kHeadersCount)]: 34,
+      [Symbol(kTrailers)]: null,
+      [Symbol(kTrailersCount)]: 0,
+      [Symbol(RequestTimeout)]: undefined
+    },
+    aborted: false,
+    timeoutCb: null,
+    upgradeOrConnect: false,
+    parser: null,
+    maxHeadersCount: null,
+    reusedSocket: false,
+    host: 'api.openai.com',
+    protocol: 'https:',
+    _redirectable: Writable {
+      _writableState: [WritableState],
+      _events: [Object: null prototype],
+      _eventsCount: 3,
+      _maxListeners: undefined,
+      _options: [Object],
+      _ended: true,
+      _ending: true,
+      _redirectCount: 0,
+      _redirects: [],
+      _requestBodyLength: 432882,
+      _requestBodyBuffers: [],
+      _onNativeResponse: [Function (anonymous)],
+      _currentRequest: [Circular *1],
+      _currentUrl: 'https://api.openai.com/v1/embeddings',
+      [Symbol(kCapture)]: false
+    },
+    [Symbol(kCapture)]: false,
+    [Symbol(kNeedDrain)]: false,
+    [Symbol(corked)]: 0,
+    [Symbol(kOutHeaders)]: [Object: null prototype] {
+      accept: [Array],
+      'content-type': [Array],
+      'user-agent': [Array],
+      authorization: [Array],
+      'content-length': [Array],
+      host: [Array]
+    }
+  },
+  data: {
+    object: 'list',
+    data: [
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object],
+      ... 93 more items
+    ],
+    model: 'text-embedding-ada-002-v2',
+    usage: { prompt_tokens: 140807, total_tokens: 140807 }
+  }
+}
+/Users/jihyun/Desktop/git/study/ws-guide-app/index.js:53
+  dfd.addColumn("embeddings", embedRes["data"][0]["embedding"], {
+                                                 ^
+
+TypeError: Cannot read properties of undefined (reading 'embedding')
+    at Server.<anonymous> (/Users/jihyun/Desktop/git/study/ws-guide-app/index.js:53:50)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+jihyun@ijihyeon-ui-MacBook-Pro ws-guide-app % 
