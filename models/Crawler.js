@@ -6,7 +6,7 @@ const fs = require("fs");
 
 class Crawler {
   constructor(resultFileName) {
-    this.contents = new Map();
+    this.contents = { fname: [], text: [] };
     this.saveFileName = resultFileName;
   }
 
@@ -62,48 +62,66 @@ class Crawler {
       for (var i = 0; i < childAnchorElement.length; i++) {
         let title = await childAnchorElement[i].getText();
         console.log("- " + title);
-        await childAnchorElement[i].click();
-        // css selector로 가져온 element가 위치할때까지 최대 20초간 기다린다.
-        await driver.wait(
-          until.elementLocated(
+        try {
+          await childAnchorElement[i].click();
+          // css selector로 가져온 element가 위치할때까지 최대 20초간 기다린다.
+          await driver.wait(
+            until.elementLocated(
+              By.className(
+                "w2wframe w2tabContainer_contents w2tabcontrol_contents_wrapper w2tabcontrol_contents_wrapper_selected"
+              )
+            ),
+            20000
+          );
+
+          let activeTabContainer = await driver.findElements(
             By.className(
               "w2wframe w2tabContainer_contents w2tabcontrol_contents_wrapper w2tabcontrol_contents_wrapper_selected"
             )
-          ),
-          20000
-        );
+          );
 
-        let activeTabContainer = await driver.findElements(
-          By.className(
-            "w2wframe w2tabContainer_contents w2tabcontrol_contents_wrapper w2tabcontrol_contents_wrapper_selected"
-          )
-        );
+          let temp = "";
 
-        let temp = "";
+          // await driver.wait(
+          //   until.elementLocated(By.className("w2tabcontrol_li")),
+          //   20000
+          // );
 
-        // await driver.wait(
-        //   until.elementLocated(By.className("w2tabcontrol_li")),
-        //   20000
-        // );
-
-        for (var j = 0; j < activeTabContainer.length; j++) {
-          temp += await activeTabContainer[j].getText();
+          for (var j = 0; j < activeTabContainer.length; j++) {
+            temp += await activeTabContainer[j].getText();
+          }
+          // contents.set(title, temp);
+          // this.contents[title] = [temp];
+          this.contents["fname"].push(title);
+          this.contents["text"].push(temp);
+        } catch {
+          continue;
         }
-        contents.set(title, temp);
       }
 
-      console.log(contents);
-      let resultStr = JSON.stringify(contents, this.replacer);
+      console.log(this.contents);
+      // let resultStr = JSON.stringify(contents, this.replacer);
+
+      // TODO 저장 실패에 따른 로직 필요?
+      let resultStr = JSON.stringify(this.contents);
+      console.log(resultStr);
       fs.writeFileSync(this.saveFileName, resultStr, (err) => {
         if (err) return false;
         else return true;
       });
+
+      // return this.contents;
     } catch (e) {
       console.log(e);
     } finally {
       driver.quit();
     }
   }
+
+  getData() {
+    return this.contents;
+  }
+
   // map to stirng
   replacer(key, value) {
     if (value instanceof Map) {
