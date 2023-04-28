@@ -8,7 +8,15 @@ class DataFrameModel {
 
   getDataFrame(rawData) {
     // return df.DataFrame(rawData, { columns: ["fname", "text"] });
-    return new df.DataFrame(rawData);
+    let idx = [];
+    let cols = ["fname", "text"];
+    let dtypes = ["string", "string"];
+    let dfObj = new df.DataFrame(rawData, { idx, cols, dtypes });
+    return dfObj;
+  }
+
+  getSeries(rawData) {
+    return new df.Series(rawData);
   }
 
   makeToCSV(dataFrameObj, isFileDown, filePath) {
