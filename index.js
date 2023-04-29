@@ -41,16 +41,20 @@ app.listen(3000, "0.0.0.0", async () => {
   }
 
   // TODO 파일읽기 외에 크롤링으로 읽어왔을 때 고려해야 함
-  // let codeFileStr = fs.readFileSync("result_copy.txt", "utf-8");
-  // let codeContents = JSON.parse(codeFileStr);
+  let codeFileStr = fs.readFileSync("result_copy.txt", "utf-8");
+  let codeContents = JSON.parse(codeFileStr);
 
-  //resultContents["code"] = codeContents["text"];
+  resultContents["code"] = [];
 
-  // let temp = resultContents["fname"].reduce((el, idx)=>{
-  //   if(codeContents["fname"].include(el)){
-  //     codeContents["fname"]
-  //   }
-  // });
+  for (let i = 0; i < resultContents["fname"].length; i++) {
+    let codeStr = "";
+    let _idx = codeContents["fname"].indexOf(resultContents["fname"][i]);
+    if (_idx > -1) {
+      codeStr = codeContents["text"][_idx].replace("Original Source\n", "");
+    }
+
+    resultContents["code"].push(codeStr);
+  }
 
   const dfCreator = new DataFrame();
   let dfd = dfCreator.getDataFrame(resultContents); // 여기에 크롤링 결과인 json 데이터를 전달
@@ -63,12 +67,6 @@ app.listen(3000, "0.0.0.0", async () => {
 
   console.log("Success Create Tokened Data.");
 
-  // 토크나이저 처리 된 데이터를 임베딩하기 전 dataframe에 저장 (우선 보류)
-  // function changeText(col) {
-  //   return col;
-  // }
-  //dfd.apply(() => {}, { axis: 0 });
-
   let embedder = new Embedding();
   let tempEmbedDataArr = await embedder.runEmbedding(tokenedData);
   // console.log(embedRes.data.data);
@@ -79,9 +77,6 @@ app.listen(3000, "0.0.0.0", async () => {
   // let tempEmbedDataArr = embedRes.map((el) => {
   //   return el.embedding;
   // });
-
-  // console.log(tempEmbedDataArr);
-  // let embedDataSeries = dfCreator.getSeries(tempEmbedDataArr);
 
   dfd.addColumn("embeddings", tempEmbedDataArr, {
     inplace: true,

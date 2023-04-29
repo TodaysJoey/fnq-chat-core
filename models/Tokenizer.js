@@ -16,8 +16,8 @@ class Tokenizer {
 
   async setDataForTokenizer(data) {
     let idx = [];
-    let cols = ["fname", "text"];
-    let dtypes = ["string", "string"];
+    let cols = ["fname", "text", "code"];
+    let dtypes = ["string", "string", "string"];
 
     this.df = new dfd.DataFrame(data, { idx, cols, dtypes });
     //this.tokenizer.encode()

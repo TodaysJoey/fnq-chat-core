@@ -9,8 +9,8 @@ class DataFrameModel {
   getDataFrame(rawData) {
     // return df.DataFrame(rawData, { columns: ["fname", "text"] });
     let idx = [];
-    let cols = ["fname", "text"];
-    let dtypes = ["string", "string"];
+    let cols = ["fname", "text", "code"];
+    let dtypes = ["string", "string", "string"];
     let dfObj = new df.DataFrame(rawData, { idx, cols, dtypes });
     return dfObj;
   }
