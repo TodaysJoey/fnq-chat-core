@@ -11,6 +11,10 @@ const Crawler = require("./models/Crawler");
 const DataFrame = require("./models/DataFrameModel");
 const Tokenizer = require("./models/Tokenizer");
 const Embedding = require("./models/Embedding");
+const Util = require("./utils/utils");
+
+// 임시로 콘솔에서 입력받기 위해 import
+const readline = require("readline");
 
 app.use(express.static(__dirname + "/ws-guide/build"));
 
@@ -36,53 +40,100 @@ app.listen(3000, "0.0.0.0", async () => {
     }
   }
 
+  // TODO 파일읽기 외에 크롤링으로 읽어왔을 때 고려해야 함
+  // let codeFileStr = fs.readFileSync("result_copy.txt", "utf-8");
+  // let codeContents = JSON.parse(codeFileStr);
+
+  //resultContents["code"] = codeContents["text"];
+
+  // let temp = resultContents["fname"].reduce((el, idx)=>{
+  //   if(codeContents["fname"].include(el)){
+  //     codeContents["fname"]
+  //   }
+  // });
+
   const dfCreator = new DataFrame();
   let dfd = dfCreator.getDataFrame(resultContents); // 여기에 크롤링 결과인 json 데이터를 전달
+  console.log("Success Create DataFrame.");
 
+  // Tokenizer 처리 임시 주석
   let tokenCreator = new Tokenizer();
-  await tokenCreator.setDataForTokenizer(resultContents);
-  let tokenedData = await tokenCreator.getTokenData(500);
+  dfd = await tokenCreator.setDataForTokenizer(resultContents);
+  let tokenedData = await tokenCreator.getTokenData(dfd, 500);
 
   console.log("Success Create Tokened Data.");
-  //   # import openai
-
-  // # df_ko['embeddings'] = df_ko.text.apply(lambda x: openai.Embedding.create(input=x, engine='text-embedding-ada-002')['data'][0]['embedding'])
-  // # df_ko.to_csv('processed/embeddings_ko.csv')
-  // # df_ko.head()
 
   // 토크나이저 처리 된 데이터를 임베딩하기 전 dataframe에 저장 (우선 보류)
-  function changeText(col) {
-    return col;
-  }
-  dfd.apply(() => {}, { axis: 0 });
+  // function changeText(col) {
+  //   return col;
+  // }
+  //dfd.apply(() => {}, { axis: 0 });
 
   let embedder = new Embedding();
-  let embedRes = await embedder.runEmbedding(tokenedData);
+  let tempEmbedDataArr = await embedder.runEmbedding(tokenedData);
   // console.log(embedRes.data.data);
 
   //embedRes["data"]["data"][0] < 오브젝트 배열
   //오브젝트 배열 내 embedding 만 배열로 뽑아서 add
 
-  let tempEmbedDataArr = embedRes.map((el) => {
-    return el.embedding;
-  });
+  // let tempEmbedDataArr = embedRes.map((el) => {
+  //   return el.embedding;
+  // });
 
   // console.log(tempEmbedDataArr);
-  let embedDataSeries = dfCreator.getSeries(tempEmbedDataArr);
-  dfd.print();
+  // let embedDataSeries = dfCreator.getSeries(tempEmbedDataArr);
 
   dfd.addColumn("embeddings", tempEmbedDataArr, {
     inplace: true,
   });
-  dfCreator.makeToCSV(dfd, true, "processed/embeddings.csv");
+  dfCreator.makeToCSV(dfd, true, "./processed/embeddings.csv");
 
   console.log("확인용");
   dfd.head(3).print(); // 확인용
 
   // 임베딩이 포함된 파일을 dataframe화
-  dfd = dfCreator.readFromCSV("./processed/embeddings.csv");
+  // dfd = dfCreator.readFromCSV("./processed/embeddings.csv");
 
   console.log("done");
+
+  // 질문 입력 받기
+  // FIXME 화면에서 입력받도록 수정
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+
+  let question = "";
+
+  rl.on("line", (line) => {
+    console.log("input: ", line);
+    question = line;
+    rl.close();
+  });
+
+  rl.on("close", () => {
+    process.exit();
+  });
+
+  let qEmbedding = await embedder.getEmbedding(question);
+  let similarities = [];
+
+  for (let embed of tempEmbedDataArr) {
+    let similarity = Util.cosineSimilarity(
+      // dfd.iloc({ rows: [i] })["embeddings"].values[0],
+      embed,
+      qEmbedding
+    );
+    similarities.push(similarity);
+  }
+
+  dfd.addColumn("similarities", similarities, {
+    inplace: true,
+  });
+
+  dfd.sortValues("similarities", { ascending: false, inplace: true });
+  let res = dfd.head(3);
+  res.print(); // 확인용
 });
 
 let runCrawler = async () => {

@@ -33,6 +33,8 @@ class Tokenizer {
     this.df.addColumn("n_tokens", n_tokens, {
       inplace: true,
     });
+
+    return this.df;
   }
 
   getDataForTokenizer() {
@@ -68,17 +70,14 @@ class Tokenizer {
     return chunks;
   }
 
-  async getTokenData(max_tokens) {
+  async getTokenData(dfd, max_tokens) {
+    this.df = dfd;
+
     let shortened = [];
 
     // 반복
     for (let i = 0; i < this.df.shape[0]; i++) {
-      // let person = {};
-      // person.name = df.iloc({rows: [i]})["Nome"].values[0];
-      // person.email = df.iloc({rows: [i]})["Email"].values[0];
-      // person.phone = df.iloc({rows: [i]})["Telefone"].values[0];
-      // person.created_at = df.iloc({rows: [i]})["Data"].values[0];
-      if (!this.df.iloc({ rows: [i] })["text"].values[0]) continue;
+      // if (!this.df.iloc({ rows: [i] })["text"].values[0]) continue;
 
       if (this.df.iloc({ rows: [i] })["n_tokens"].values[0] > max_tokens) {
         let temp = await this._splitStrIntoMany(

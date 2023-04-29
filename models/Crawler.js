@@ -23,9 +23,7 @@ class Crawler {
 
     try {
       // 특정 URL 생성
-      await driver.get(
-        "https://example.websquare.kr/websquare/websquare.html?w2xPath=/mainContainer.xml"
-      );
+      await driver.get(process.env.URL_TARGET);
       let userAgent = await driver.executeScript("return navigator.userAgent;");
       console.log("[UserAgent]", userAgent);
 
@@ -63,6 +61,7 @@ class Crawler {
         let title = await childAnchorElement[i].getText();
         console.log("- " + title);
         try {
+          console.log("here try");
           await childAnchorElement[i].click();
           // css selector로 가져온 element가 위치할때까지 최대 20초간 기다린다.
           await driver.wait(
@@ -74,22 +73,46 @@ class Crawler {
             20000
           );
 
-          let activeTabContainer = await driver.findElements(
-            By.className(
-              "w2wframe w2tabContainer_contents w2tabcontrol_contents_wrapper w2tabcontrol_contents_wrapper_selected"
-            )
+          // let activeTabContainer = await driver.findElements(
+          //   By.className(
+          //     "w2wframe w2tabContainer_contents w2tabcontrol_contents_wrapper w2tabcontrol_contents_wrapper_selected"
+          //   )
+          // );
+
+          // 탭 클릭
+          let sourceTabButton = await driver.findElement(
+            By.linkText("Original Source")
+          );
+
+          console.log(await sourceTabButton.getText());
+          await sourceTabButton.click();
+
+          await driver.wait(
+            until.elementLocated(By.className("w2tabcontrol_contents")),
+            5000
+          );
+          // w2textbox hljs
+          //"w2group cke_show_blocks_off com_example_viewSource_pre"
+
+          let codeContainers = await driver.findElements(
+            By.className("w2tabcontrol_contents")
           );
 
           let temp = "";
-
-          // await driver.wait(
-          //   until.elementLocated(By.className("w2tabcontrol_li")),
-          //   20000
-          // );
-
-          for (var j = 0; j < activeTabContainer.length; j++) {
-            temp += await activeTabContainer[j].getText();
+          for (let j = 0; j < codeContainers.length; j++) {
+            let attr = await codeContainers[j].getAttribute("aria-labelledby");
+            if (attr == "Original Source") {
+              console.log("codeContainer");
+              temp += await codeContainers[j].getText();
+              console.log(temp);
+            }
           }
+
+          // let temp = "";
+
+          // for (var j = 0; j < activeTabContainer.length; j++) {
+          //   temp += await activeTabContainer[j].getText();
+          // }
           // contents.set(title, temp);
           // this.contents[title] = [temp];
           this.contents["fname"].push(title);
