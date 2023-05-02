@@ -10,7 +10,7 @@ class Completion {
   constructor(q, a) {
     let idx = a.indexOf("예제 소스");
     if (idx > -1) {
-      a = a.substring(0, idx + 1);
+      a = a.substring(0, idx);
     }
 
     this.lastSentence =
