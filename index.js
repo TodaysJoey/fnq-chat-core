@@ -11,6 +11,7 @@ const Crawler = require("./models/Crawler");
 const DataFrame = require("./models/DataFrameModel");
 const Tokenizer = require("./models/Tokenizer");
 const Embedding = require("./models/Embedding");
+const Completion = require("./models/Completion");
 const Util = require("./utils/utils");
 
 // 임시로 콘솔에서 입력받기 위해 import
@@ -110,7 +111,7 @@ app.listen(3000, "0.0.0.0", async () => {
     process.exit();
   });
 
-  let qEmbedding = await embedder.getEmbedding(question);
+  let qEmbedding = await embeddgetEmbedding(question);
   let similarities = [];
 
   for (let embed of tempEmbedDataArr) {
@@ -129,6 +130,11 @@ app.listen(3000, "0.0.0.0", async () => {
   dfd.sortValues("similarities", { ascending: false, inplace: true });
   let res = dfd.head(3);
   res.print(); // 확인용
+
+  let topScoreText = res.iloc({ rows: [0] })["text"].values[0];
+  let resCompl = new Completion(question, topScoreText);
+  let resComplResult = await resCompl.getCompletionRes();
+  console.log(resComplResult.data.choices[0].text); // 최종 답변
 });
 
 let runCrawler = async () => {
