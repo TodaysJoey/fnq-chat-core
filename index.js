@@ -16,6 +16,7 @@ const Tokenizer = require("./models/Tokenizer");
 const Embedding = require("./models/Embedding");
 const Completion = require("./models/Completion");
 const Util = require("./utils/utils");
+const cors = require("cors");
 
 var dfd;
 var tempEmbedDataArr;
@@ -25,6 +26,7 @@ var embedder;
 app.use(express.json()); // json 파싱
 app.use(express.urlencoded({ extended: true })); // x-www-form-urlencoded 파싱
 // app.use("/", route);
+app.use(cors())
 
 app.get("/", (req, res) => {
   // res.sendFile("index.html"); // static 폴더로, react 프로젝트 내 build 디렉토리를 잡아주었으므로, 경로 생략 가능
