@@ -5,6 +5,7 @@ const reulstFileName = "result.txt";
 const dfModule = require("danfojs-node");
 var resultContents = {};
 var embedResultContents = {};
+var rtnContents = [];
 
 var express = require("express");
 var app = express();
@@ -18,6 +19,7 @@ const Embedding = require("./models/Embedding");
 const Completion = require("./models/Completion");
 const Util = require("./utils/utils");
 const cors = require("cors");
+const StudioAPI = require("./studioAPI");
 
 var dfd;
 var tempEmbedDataArr;
@@ -64,10 +66,24 @@ app.post("/chat/call", async (req, res) => {
  *
  */
 app.post("/chat/call/code", (req, res) => {
-  const { path } = req.body;
+  const { id, path } = req.body;
+
+  console.log(id);
+  console.log(rtnContents);
+
+  let _id = Number(id.replace(/[^0-9]/g, ""));
+  let _path = path + "/" + "answer" + id + ".xml";
+  fs.writeFileSync(_path, rtnContents[_id], (err) => {
+    if (err) {
+      console.log("File Save xml file...");
+      res.status(200);
+    } else {
+      console.log("Success Save xml file...");
+      res.status(500);
+    }
+  });
 
   //TODO 파일저장로직
-  res.status(200);
 });
 
 app.listen(3000, "0.0.0.0", async () => {
@@ -166,13 +182,15 @@ const createReply = async (question) => {
   res.print(); // 확인용
 
   let topScoreText = res.iloc({ rows: [0] })["text"].values[0];
-  let secndScoreText = res.iloc({ rows: [1] })["text"].values[0]; // 보류...
+  // let secndScoreText = res.iloc({ rows: [1] })["text"].values[0]; // 보류...
   let resCompl = new Completion(question, topScoreText);
   let resComplResult = await resCompl.getCompletionRes();
-  let resCompl2 = new Completion(question, secndScoreText);
-  let resComplResult2 = await resCompl2.getCompletionRes();
+  // let resCompl2 = new Completion(question, secndScoreText);
+  // let resComplResult2 = await resCompl2.getCompletionRes();
   console.log(resComplResult.data.choices[0].text); // 최종 답변
-  console.log(resComplResult2.data.choices[0].text);
+  // console.log(resComplResult2.data.choices[0].text);
+
+  rtnContents.push(res.iloc({ rows: [0] })["code"].values[0]);
   return resComplResult.data.choices[0].text;
 };
 
