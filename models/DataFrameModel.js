@@ -19,11 +19,11 @@ class DataFrameModel {
     return new df.Series(rawData);
   }
 
-  makeToCSV(dataFrameObj, isFileDown, filePath) {
+  makeToCSV(dataFrameObj, isFileDown, path) {
     if (isFileDown === true) {
       df.toCSV(dataFrameObj, {
-        fileName: filePath,
-        download: isFileDown,
+        filePath: path,
+        header: true,
       });
       return "save";
     } else {
@@ -32,8 +32,17 @@ class DataFrameModel {
     }
   }
 
-  makeToJson(dataFrameObj) {
-    return df.toJSON(dataFrameObj, { format: "row" });
+  async makeToJson(dataFrameObj, isDown, path) {
+    if (isDown === true) {
+      df.toJSON(dataFrameObj, {
+        filePath: path,
+        format: "row",
+      });
+      return "save";
+    } else {
+      let jsonDf = await df.toJSON(dataFrameObj, { format: "row" });
+      return jsonDf;
+    }
   }
 
   readFromCSV(path) {
@@ -48,9 +57,17 @@ class DataFrameModel {
       });
   }
   // 일단 필요 없을 듯..
-  // readFromJson(path) {
-  //   df.readJSON();
-  // }
+  readFromJson(path) {
+    df.readJSON(path)
+      .then((_df) => {
+        _df.head().print();
+        return _df;
+      })
+      .catch((err) => {
+        console.log(err);
+        return false;
+      });
+  }
 }
 
 module.exports = DataFrameModel;

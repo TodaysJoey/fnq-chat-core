@@ -2,8 +2,9 @@
 // const chrome = require("selenium-webdriver/chrome");
 const fs = require("fs");
 const reulstFileName = "result.txt";
-
+const dfModule = require("danfojs-node");
 var resultContents = {};
+var embedResultContents = {};
 
 var express = require("express");
 var app = express();
@@ -26,7 +27,7 @@ var embedder;
 app.use(express.json()); // json 파싱
 app.use(express.urlencoded({ extended: true })); // x-www-form-urlencoded 파싱
 // app.use("/", route);
-app.use(cors())
+app.use(cors());
 
 app.get("/", (req, res) => {
   // res.sendFile("index.html"); // static 폴더로, react 프로젝트 내 build 디렉토리를 잡아주었으므로, 경로 생략 가능
@@ -42,9 +43,6 @@ app.get("/", (req, res) => {
  *
  */
 app.post("/chat/call", async (req, res) => {
-  console.log("here");
-  console.log(req);
-  //req.body.message;
   const { message } = req.body;
 
   try {
@@ -125,47 +123,10 @@ app.listen(3000, "0.0.0.0", async () => {
     inplace: true,
   });
 
-  dfCreator.makeToCSV(dfd, true, "./processed/embeddings.csv"); // TODO 동작 확인
+  embedResultContents = await dfCreator.makeToJson(dfd, false); // 임베딩까지 한 결과 JSON 형식으로 저장
 
   console.log("Embedding Result ----------------------------");
   dfd.head(3).print(); // 확인용
-
-  // let question = "";
-
-  // rl.on("line", (line) => {
-  //   console.log("input: ", line);
-  //   question = line;
-  //   rl.close();
-  // });
-
-  // rl.on("close", () => {
-  //   process.exit();
-  // });
-
-  // let qEmbedding = await embedder.getEmbedding(question);
-  // let similarities = [];
-
-  // for (let embed of tempEmbedDataArr) {
-  //   let similarity = Util.cosineSimilarity(
-  //     // dfd.iloc({ rows: [i] })["embeddings"].values[0],
-  //     embed,
-  //     qEmbedding
-  //   );
-  //   similarities.push(similarity);
-  // }
-
-  // dfd.addColumn("similarities", similarities, {
-  //   inplace: true,
-  // });
-
-  // dfd.sortValues("similarities", { ascending: false, inplace: true });
-  // let res = dfd.head(3);
-  // res.print(); // 확인용
-
-  // let topScoreText = res.iloc({ rows: [0] })["text"].values[0];
-  // let resCompl = new Completion(question, topScoreText);
-  // let resComplResult = await resCompl.getCompletionRes();
-  // console.log(resComplResult.data.choices[0].text); // 최종 답변
 });
 
 let runCrawler = async () => {
@@ -181,6 +142,9 @@ let runCrawler = async () => {
 };
 
 const createReply = async (question) => {
+  const dfCreator = new DataFrame();
+  dfd = dfCreator.getDataFrame(resultContents);
+
   let qEmbedding = await embedder.getEmbedding(question);
   let similarities = [];
 
@@ -202,10 +166,13 @@ const createReply = async (question) => {
   res.print(); // 확인용
 
   let topScoreText = res.iloc({ rows: [0] })["text"].values[0];
+  let secndScoreText = res.iloc({ rows: [1] })["text"].values[0]; // 보류...
   let resCompl = new Completion(question, topScoreText);
   let resComplResult = await resCompl.getCompletionRes();
+  let resCompl2 = new Completion(question, secndScoreText);
+  let resComplResult2 = await resCompl2.getCompletionRes();
   console.log(resComplResult.data.choices[0].text); // 최종 답변
-
+  console.log(resComplResult2.data.choices[0].text);
   return resComplResult.data.choices[0].text;
 };
 
