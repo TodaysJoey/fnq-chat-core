@@ -19,7 +19,7 @@ const Embedding = require("./models/Embedding");
 const Completion = require("./models/Completion");
 const Util = require("./utils/utils");
 const cors = require("cors");
-const StudioAPI = require("./studioAPI");
+//const StudioAPI = require("./studioAPI");
 
 var dfd;
 var tempEmbedDataArr;
@@ -66,13 +66,13 @@ app.post("/chat/call", async (req, res) => {
  *
  */
 app.post("/chat/call/code", (req, res) => {
-  const { id, path } = req.body;
-
-  console.log(id);
-  console.log(rtnContents);
+  const { id, question, path } = req.body;
+  
+  let fileName = question.replace(/\s/g, "_");
 
   let _id = Number(id.replace(/[^0-9]/g, ""));
-  let _path = path + "/" + "answer" + id + ".xml";
+
+  let _path = path + "/" + "answer" + fileName + ".xml";
   fs.writeFileSync(_path, rtnContents[_id], (err) => {
     if (err) {
       console.log("File Save xml file...");
@@ -189,7 +189,13 @@ const createReply = async (question) => {
   // let resComplResult2 = await resCompl2.getCompletionRes();
   console.log(resComplResult.data.choices[0].text); // 최종 답변
   // console.log(resComplResult2.data.choices[0].text);
+  
+  // let textStr = res.iloc({ rows: [0] })["text"].values[0];
+  // let scriptStartIdx = textStr.indexOf("scwin.onpageload");
+  // let scriptStr = textStr.substring(scriptStartIdx);
+  // let codeStr = res.iloc({ rows: [0] })["code"];
 
+  
   rtnContents.push(res.iloc({ rows: [0] })["code"].values[0]);
   return resComplResult.data.choices[0].text;
 };
