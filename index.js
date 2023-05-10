@@ -49,7 +49,7 @@ app.post("/chat/call", async (req, res) => {
 
   try {
     let replyStr = await createReply(message);
-    res.json({ message: replyStr });
+    res.json({ message: replyStr.message, code: replyStr.code });
   } catch (err) {
     res.status(406).json({
       message: err.message,
@@ -197,7 +197,7 @@ const createReply = async (question) => {
 
   
   rtnContents.push(res.iloc({ rows: [0] })["code"].values[0]);
-  return resComplResult.data.choices[0].text;
+  return {"message": resComplResult.data.choices[0].text, "code": res.iloc({ rows: [0] })["code"].values[0]};
 };
 
 module.exports = { createReply };
