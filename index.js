@@ -49,7 +49,14 @@ app.post("/chat/call", async (req, res) => {
 
   try {
     let replyStr = await createReply(message);
-    res.json({ message: replyStr.message, code: replyStr.code });
+    res.json({
+      message: replyStr.message,
+      code: replyStr.code,
+      script: replyStr.script,
+      url:
+        "https://example.websquare.kr/websquare/websquare.html#w2xPath=" +
+        replyStr.url,
+    });
   } catch (err) {
     res.status(406).json({
       message: err.message,
@@ -67,7 +74,7 @@ app.post("/chat/call", async (req, res) => {
  */
 app.post("/chat/call/code", (req, res) => {
   const { id, question, path } = req.body;
-  
+
   let fileName = question.replace(/\s/g, "_");
 
   let _id = Number(id.replace(/[^0-9]/g, ""));
@@ -189,15 +196,40 @@ const createReply = async (question) => {
   // let resComplResult2 = await resCompl2.getCompletionRes();
   console.log(resComplResult.data.choices[0].text); // 최종 답변
   // console.log(resComplResult2.data.choices[0].text);
-  
-  // let textStr = res.iloc({ rows: [0] })["text"].values[0];
-  // let scriptStartIdx = textStr.indexOf("scwin.onpageload");
-  // let scriptStr = textStr.substring(scriptStartIdx);
-  // let codeStr = res.iloc({ rows: [0] })["code"];
 
-  
   rtnContents.push(res.iloc({ rows: [0] })["code"].values[0]);
-  return {"message": resComplResult.data.choices[0].text, "code": res.iloc({ rows: [0] })["code"].values[0]};
+
+  let scriptStr = "";
+
+  let delimiter =
+    "\nScript\nBody\nDataCollection\nCSS\nOriginal Source\nHistory\nScript\n";
+  let delimiterLen = delimiter.length;
+  let _scriptStartIdx = topScoreText.indexOf(delimiter);
+  if (_scriptStartIdx > -1) {
+    let tempScriptStr = topScoreText.substring(_scriptStartIdx + delimiterLen);
+
+    if (tempScriptStr.length < 40) {
+      scriptStr = "";
+    } else {
+      scriptStr = tempScriptStr;
+    }
+  }
+
+  let urlDelimiter = "/page/";
+  let _urlStartIdx = topScoreText.indexOf(urlDelimiter);
+  let urlStr = "";
+  if (_urlStartIdx > -1) {
+    let tempUrlStr = topScoreText.substring(_urlStartIdx);
+    let tempArr = tempUrlStr.split(".xml");
+    urlStr = tempArr[0] + ".xml";
+  }
+
+  return {
+    message: resComplResult.data.choices[0].text,
+    code: res.iloc({ rows: [0] })["code"].values[0],
+    script: scriptStr,
+    url: urlStr,
+  };
 };
 
 module.exports = { createReply };
