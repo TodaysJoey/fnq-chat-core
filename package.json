@@ -1,15 +1,22 @@
 {
-  "name": "ws-guide-server",
+  "name": "fnq-chat-core",
   "version": "1.0.0",
-  "description": "",
+  "description": "솔루션 API 설명과 예제 검색 챗봇 Core. 웹 페이지 크롤링으로 데이터 추출, OpenAI Embedding 기능 및 GPT 엔진을 연계.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
-  "author": "",
+  "author": "이지현",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kefranabg/readme-md-generator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TodaysJoey/fnq-chat-core/issues"
+  },
   "dependencies": {
     "@dqbd/tiktoken": "1.0.6",
     "cors": "^2.8.5",
