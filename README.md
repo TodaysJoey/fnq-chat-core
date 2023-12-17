@@ -10,6 +10,9 @@
 </p>
 
 > 솔루션 API 설명과 예제 검색 챗봇 Core. 웹 페이지 크롤링으로 데이터 추출, OpenAI Embedding 기능 및 GPT 엔진을 연계.
+> UI와 함께 실행 필요, https://github.com/TodaysJoey/fnq-chat-ui
+<img width="375" alt="스크린샷 2023-07-25 오전 2 04 14" src="https://github.com/TodaysJoey/TextoDoc/assets/88923789/ef1f8677-cc03-4c28-8007-0605d2180c22">
+<img width="375" alt="스크린샷 2023-07-25 오전 2 04 14" src="https://github.com/TodaysJoey/TextoDoc/assets/88923789/ef1f8677-cc03-4c28-8007-0605d2180c22">
 
 ## Install
 
